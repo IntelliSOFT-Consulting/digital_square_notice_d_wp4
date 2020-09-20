@@ -1,0 +1,74 @@
+#Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+# https://github.com/takari/maven-wrapper#usage-without-binary-jar
+.mvn/wrapper/maven-wrapper.jar
+
+# java specific
+*.class
+
+# Package File
+*.jar
+!lib/*
+*.war
+*.ear
+
+# eclipse conf file
+.settings
+.classpath
+.project
+.manager
+.scala_dependencies
+.cache
+
+# idea conf files
+*.idea
+.idea/*
+*.iml
+*.ipr
+*.iws
+.idea/workspace.xml
+.idea/misc.xml
+.idea/libraries
+.idea/*datasources.*
+.idea/*dataSources.*
+.idea/encodings.xml
+.idea/dictionaries/*
+.idea/modules.xml
+.idea/vcs.xml
+
+# building
+target
+build
+null
+tmp
+temp
+dist
+test-output
+build.log
+.externalToolBuilders
+# release.properties
+pom.xml.releaseBackup
+
+## generic files to ignore
+*~
+*.lock
+*.DS_Store
+*.swp
+*.out
+.java-version
+/bin/
+
+release.properties
+
+
+
+
+

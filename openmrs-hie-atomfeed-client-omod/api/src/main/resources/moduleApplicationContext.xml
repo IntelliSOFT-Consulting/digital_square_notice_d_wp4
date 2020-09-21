@@ -25,34 +25,4 @@
 
     <context:component-scan base-package="org.openmrs.module.hei.atomfeed.client" />
 
-    <!-- Wraps HEIAtomfeedclientService methods in DB transactions and OpenMRS interceptors,
-    which set audit info like dateCreated, changedBy, etc.-->
-    <bean id="hei.atomfeed.client.HEIAtomfeedclientService"
-            class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-        <property name="transactionManager">
-            <ref bean="transactionManager" />
-        </property>
-        <property name="target">
-            <bean class="org.openmrs.module.hei.atomfeed.client.api.impl.HEIAtomfeedclientServiceImpl">
-                <property name="dao" ref="hei.atomfeed.client.HEIAtomfeedclientDao" />
-            </bean>
-        </property>
-        <property name="preInterceptors">
-            <ref bean="serviceInterceptors" />
-        </property>
-        <property name="transactionAttributeSource">
-            <ref bean="transactionAttributeSource" />
-        </property>
-    </bean>
-
-    <!-- Adds HEIAtomfeedclientService to OpenMRS context so it can be accessed
-    calling Context.getService(HEIAtomfeedclientService.class) -->
-    <bean parent="serviceContext">
-        <property name="moduleService">
-            <list>
-                <value>org.openmrs.module.hei.atomfeed.client.api.HEIAtomfeedclientService</value>
-                <ref bean="hei.atomfeed.client.HEIAtomfeedclientService" />
-            </list>
-        </property>
-    </bean>
 </beans>

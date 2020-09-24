@@ -27,6 +27,12 @@
 	<aware_of_modules>
 		<aware_of_module>org.openmrs.module.legacyui</aware_of_module>
 	</aware_of_modules>
+
+    <require_modules>
+        <require_module>org.openmrs.module.webservices.rest</require_module>
+        <require_module>org.ict4h.openmrs.openmrs-atomfeed</require_module>
+        <require_module>org.openmrs.module.fhir2</require_module>
+    </require_modules>
 	
 	
 	<!-- AOP
@@ -45,18 +51,14 @@
 	 /Required Privileges -->
 
 
-	<!-- Required Global Properties 
 	<globalProperty>
-		<property>@MODULE_ID@.someProperty</property>
-		<defaultValue></defaultValue>
+		<property>hie.feed.id.prefix</property>
+		<defaultValue>686efce2-fd87-11ea-93a4-639a3b44a033</defaultValue>
 		<description>
-			A description of the global property goes here.  The description
-			should explain enough for administrators to understand the purpose
-			and possible values for the global property.
+			Atom feed id.
 		</description>
 	</globalProperty>
-	/Required Global Properties -->
-	
+
 	<!--
 	<dwr>
 		<allow>

@@ -9,18 +9,18 @@
     </parent>
 
 	<groupId>org.openmrs.module</groupId>
-	<artifactId>hei.atomfeed.client</artifactId>
+	<artifactId>hie.atomfeed.client</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>HEI Atomfeed client</name>
+	<name>HIE Atomfeed client</name>
 	<description>An atom feed client that publishes FHIR resources</description>
 
 	<url>https://wiki.openmrs.org/x/FQ4z</url>
 
 	<scm>
-		<connection>scm:git:git@github.com:openmrs/openmrs-module-hei.atomfeed.client.git</connection>
-		<developerConnection>scm:git:git@github.com:openmrs/openmrs-module-hei.atomfeed.client.git</developerConnection>
-		<url>https://github.com/openmrs/openmrs-module-hei.atomfeed.client/</url>
+		<connection>scm:git:git@github.com:openmrs/openmrs-module-hie.atomfeed.client.git</connection>
+		<developerConnection>scm:git:git@github.com:openmrs/openmrs-module-hie.atomfeed.client.git</developerConnection>
+		<url>https://github.com/openmrs/openmrs-module-hie.atomfeed.client/</url>
 	</scm>
 
 	<modules>
@@ -28,6 +28,41 @@
 		<module>omod</module>
 	</modules>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.ict4h.openmrs</groupId>
+            <artifactId>openmrs-atomfeed-common</artifactId>
+            <version>${openmrsAtomfeedVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openmrs.module</groupId>
+            <artifactId>webservices.rest-omod</artifactId>
+            <version>${openMRSWebServicesVersion}</version>
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.openmrs.module</groupId>
+            <artifactId>webservices.rest-omod-common</artifactId>
+            <version>${openMRSWebServicesVersion}</version>
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.openmrs.module</groupId>
+            <artifactId>webservices.rest-omod-common</artifactId>
+            <version>${openMRSWebServicesVersion}</version>
+            <classifier>tests</classifier>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.openmrs.module</groupId>
+            <artifactId>fhir2-api</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <type>pom</type>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 	<repositories>
 		<repository>
 			<id>openmrs-repo</id>
@@ -40,6 +75,14 @@
 			<layout>default</layout>
 			<url>http://repo1.maven.org/maven2</url>
 		</repository>
+        <!--<repository>-->
+            <!--<id>openmrs-snapshots</id>-->
+            <!--<name>OpenMRS Snapshot Repository</name>-->
+            <!--<url>https://mavenrepo.openmrs.org/snapshots</url>-->
+            <!--<snapshots>-->
+                <!--<enabled>true</enabled>-->
+            <!--</snapshots>-->
+        <!--</repository>-->
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
@@ -54,5 +97,9 @@
 
     <properties>
         <openmrsPlatformVersion>2.1.1</openmrsPlatformVersion>
+        <openmrsAtomfeedVersion>2.5.6</openmrsAtomfeedVersion>
+        <atomfeed.version>1.9.4</atomfeed.version>
+        <openMRSWebServicesVersion>2.20.0</openMRSWebServicesVersion>
+        <openmrsFhir2Version>1.0.0-SNAPSHOT</openmrsFhir2Version>
     </properties>
 </project>

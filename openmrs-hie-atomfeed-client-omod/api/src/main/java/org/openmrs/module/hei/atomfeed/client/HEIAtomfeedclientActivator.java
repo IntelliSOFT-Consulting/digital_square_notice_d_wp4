@@ -11,6 +11,7 @@ package org.openmrs.module.hei.atomfeed.client;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmrs.api.AdministrationService;
 import org.openmrs.module.BaseModuleActivator;
 
 /**
@@ -32,6 +33,10 @@ public class HEIAtomfeedclientActivator extends BaseModuleActivator {
 	 */
 	public void shutdown() {
 		log.info("Shutdown HEI Atomfeed client");
+	}
+	
+	private void setAtomFeedGlobalProperties() {
+		
 	}
 	
 }

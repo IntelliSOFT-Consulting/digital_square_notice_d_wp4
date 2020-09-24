@@ -25,4 +25,13 @@
 
     <context:component-scan base-package="org.openmrs.module.hei.atomfeed.client" />
 
+    <bean parent="serviceContext">
+        <property name="moduleService">
+            <list>
+                <value>org.openmrs.module.hei.atomfeed.client.api.client.OpenMrsPatientFeedClient</value> <!-- service interface name -->
+                <ref bean="openMrsPatientFeedClient"/>
+            </list>
+        </property>
+    </bean>
+
 </beans>

@@ -7,7 +7,7 @@
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
-package org.openmrs.module.hei.atomfeed.client;
+package org.openmrs.module.hie.atomfeed.client;
 
 import org.springframework.stereotype.Component;
 
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
  * Contains module's config.
  */
 @Component("hei.atomfeed.client.HEIAtomfeedclientConfig")
-public class HEIAtomfeedclientConfig {
+public class HieAtomfeedclientConfig {
 	
 	public final static String MODULE_PRIVILEGE = "HEI Atomfeed client Privilege";
 }

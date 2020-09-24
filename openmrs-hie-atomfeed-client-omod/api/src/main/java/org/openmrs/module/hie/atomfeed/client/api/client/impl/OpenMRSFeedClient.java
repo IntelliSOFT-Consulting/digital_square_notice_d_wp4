@@ -1,4 +1,4 @@
-package org.openmrs.module.hei.atomfeed.client.api.client.impl;
+package org.openmrs.module.hie.atomfeed.client.api.client.impl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -12,8 +12,7 @@ import org.ict4h.atomfeed.client.repository.jdbc.AllMarkersJdbcImpl;
 import org.ict4h.atomfeed.client.service.AtomFeedClient;
 import org.ict4h.atomfeed.client.service.EventWorker;
 import org.openmrs.module.atomfeed.transaction.support.AtomFeedSpringTransactionManager;
-import org.openmrs.module.hei.atomfeed.client.api.HieAtomFeedProperties;
-import org.openmrs.module.hei.atomfeed.client.api.helper.HieHttpHelper;
+import org.openmrs.module.hie.atomfeed.client.api.HieAtomFeedProperties;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import java.net.URI;
@@ -59,7 +58,7 @@ public abstract class OpenMRSFeedClient {
 	public org.ict4h.atomfeed.client.service.FeedClient createAtomFeedClient() {
 		URI uriForFeed = getURIForFeed(getFeedUri(properties));
 		ConnectionDetails connectionDetails = createConnectionDetails(properties);
-		HieHttpHelper httpClient = new HieHttpHelper(connectionDetails, new OpenMRSLoginAuthenticator(connectionDetails));
+		HttpClient httpClient = new HttpClient(connectionDetails, new OpenMRSLoginAuthenticator(connectionDetails));
 		ClientCookies cookies = httpClient.getCookies(uriForFeed);
 		EventWorker openMRSEventWorker = createWorker(httpClient, properties);
 		AtomFeedSpringTransactionManager txMgr = new AtomFeedSpringTransactionManager(transactionManager);

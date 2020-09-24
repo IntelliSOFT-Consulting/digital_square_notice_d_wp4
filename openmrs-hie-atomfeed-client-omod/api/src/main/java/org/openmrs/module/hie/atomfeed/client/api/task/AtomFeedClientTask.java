@@ -1,9 +1,9 @@
-package org.openmrs.module.hei.atomfeed.client.api.task;
+package org.openmrs.module.hie.atomfeed.client.api.task;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.api.context.Context;
-import org.openmrs.module.hei.atomfeed.client.api.client.OpenMrsPatientFeedClient;
+import org.openmrs.module.hie.atomfeed.client.api.client.OpenMrsPatientFeedClient;
 import org.openmrs.scheduler.tasks.AbstractTask;
 
 public class AtomFeedClientTask extends AbstractTask {

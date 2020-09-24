@@ -7,7 +7,7 @@
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
-package org.openmrs.module.hei.atomfeed.client;
+package org.openmrs.module.hie.atomfeed.client;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -17,7 +17,7 @@ import org.openmrs.module.BaseModuleActivator;
 /**
  * This class contains the logic that is run every time this module is either started or shutdown
  */
-public class HEIAtomfeedclientActivator extends BaseModuleActivator {
+public class HieAtomfeedclientActivator extends BaseModuleActivator {
 	
 	private Log log = LogFactory.getLog(this.getClass());
 	
@@ -33,10 +33,6 @@ public class HEIAtomfeedclientActivator extends BaseModuleActivator {
 	 */
 	public void shutdown() {
 		log.info("Shutdown HEI Atomfeed client");
-	}
-	
-	private void setAtomFeedGlobalProperties() {
-		
 	}
 	
 }

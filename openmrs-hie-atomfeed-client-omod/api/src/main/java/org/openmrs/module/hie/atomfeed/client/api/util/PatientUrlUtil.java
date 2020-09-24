@@ -1,4 +1,4 @@
-package org.openmrs.module.hei.atomfeed.client.api.util;
+package org.openmrs.module.hie.atomfeed.client.api.util;
 
 public class PatientUrlUtil {
 	

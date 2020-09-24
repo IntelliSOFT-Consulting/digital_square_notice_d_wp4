@@ -1,4 +1,4 @@
-package org.openmrs.module.hei.atomfeed.client.api.client.impl;
+package org.openmrs.module.hie.atomfeed.client.api.client.impl;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.logging.Log;
@@ -8,10 +8,9 @@ import org.ict4h.atomfeed.client.service.EventWorker;
 import org.joda.time.DateTime;
 import org.openmrs.api.PatientService;
 import org.openmrs.module.fhir2.api.translators.PatientTranslator;
-import org.openmrs.module.hei.atomfeed.client.api.HieAtomFeedProperties;
-import org.openmrs.module.hei.atomfeed.client.api.client.OpenMrsPatientFeedClient;
-import org.openmrs.module.hei.atomfeed.client.api.helper.HieHttpHelper;
-import org.openmrs.module.hei.atomfeed.client.api.worker.HieAtomFeedEventWorker;
+import org.openmrs.module.hie.atomfeed.client.api.HieAtomFeedProperties;
+import org.openmrs.module.hie.atomfeed.client.api.client.OpenMrsPatientFeedClient;
+import org.openmrs.module.hie.atomfeed.client.api.worker.HieAtomFeedEventWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;

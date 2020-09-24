@@ -76,7 +76,7 @@
     </dependencies>
     <parent>
 		<groupId>org.openmrs.module</groupId>
-		<artifactId>hei.atomfeed.client</artifactId>
+		<artifactId>hie.atomfeed.client</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 

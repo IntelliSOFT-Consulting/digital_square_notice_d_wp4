@@ -1,4 +1,4 @@
-package org.openmrs.module.hei.atomfeed.client.api.worker;
+package org.openmrs.module.hie.atomfeed.client.api.worker;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
@@ -11,9 +11,8 @@ import org.ict4h.atomfeed.client.service.EventWorker;
 import org.openmrs.Patient;
 import org.openmrs.api.PatientService;
 import org.openmrs.module.fhir2.api.translators.PatientTranslator;
-import org.openmrs.module.hei.atomfeed.client.api.HieAtomFeedProperties;
-import org.openmrs.module.hei.atomfeed.client.api.util.PatientUrlUtil;
-
+import org.openmrs.module.hie.atomfeed.client.api.HieAtomFeedProperties;
+import org.openmrs.module.hie.atomfeed.client.api.util.PatientUrlUtil;
 
 public class HieAtomFeedEventWorker implements EventWorker {
 	
@@ -51,7 +50,7 @@ public class HieAtomFeedEventWorker implements EventWorker {
 	private void processPatientEvent(Event event) {
 		String patientUrl = properties.getOpenMrsUri() + event.getContent();
 		String patientUuid = PatientUrlUtil.getFulUuidVarFromUrl(event.getContent());
-
+		
 		try {
 			Patient patient = patientService.getPatientByUuid(patientUuid);
 			if (patient == null) {
@@ -62,7 +61,7 @@ public class HieAtomFeedEventWorker implements EventWorker {
 			
 			Gson gson = new Gson();
 			String fhirJson = gson.toJson(hl7Patient);
-
+			
 			//TODO : Push fhir json object to hie server
 			
 		}

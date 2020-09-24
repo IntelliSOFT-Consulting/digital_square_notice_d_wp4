@@ -13,10 +13,10 @@
         for a list of supported elements and attributes
     -->
 
-    <changeSet id="create-hei-atom-feed-task-20200921000000" author="ekirapa">
+    <changeSet id="create-hie-atom-feed-task-20200921000000" author="ekirapa">
         <preConditions>
             <sqlCheck expectedResult="0">
-                SELECT COUNT(*) FROM scheduler_task_config WHERE name = "OpenMRS Atom Feed Hei Client Task";
+                SELECT COUNT(*) FROM scheduler_task_config WHERE name = "OpenMRS Atom Feed Hie Client Task";
             </sqlCheck>
         </preConditions>
         <sql>
@@ -25,8 +25,8 @@
             scheduler_task_config(name, description, schedulable_class, start_time, start_time_pattern, repeat_interval,
             start_on_startup, created_by, date_created, uuid)
             VALUES
-            ('OpenMRS Atom Feed Hei Client Task', 'OpenMRS Atom Feed Hei Client Task',
-            'org.openmrs.module.hei.atomfeed.client.api.task.AtomFeedClientTask',
+            ('OpenMRS Atom Feed Hie Client Task', 'OpenMRS Atom Feed Hie Client Task',
+            'org.openmrs.module.hie.atomfeed.client.api.task.AtomFeedClientTask',
             TIMESTAMP(CURDATE()), 'MM/dd/yyyy HH:mm:ss', 120, TRUE, 1, NOW(), UUID());
         </sql>
     </changeSet>

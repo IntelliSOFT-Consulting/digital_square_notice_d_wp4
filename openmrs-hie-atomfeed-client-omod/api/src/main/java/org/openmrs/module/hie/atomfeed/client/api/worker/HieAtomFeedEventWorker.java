@@ -8,9 +8,12 @@ import org.bahmni.webclients.HttpClient;
 import org.bahmni.webclients.HttpHeaders;
 import org.ict4h.atomfeed.client.domain.Event;
 import org.ict4h.atomfeed.client.service.EventWorker;
+import org.openmrs.Encounter;
 import org.openmrs.Patient;
+import org.openmrs.api.EncounterService;
 import org.openmrs.api.PatientService;
 import org.openmrs.module.fhir2.api.translators.PatientTranslator;
+import org.openmrs.module.fhir2.api.translators.impl.EncounterTranslatorImpl;
 import org.openmrs.module.hie.atomfeed.client.api.HieAtomFeedProperties;
 import org.openmrs.module.hie.atomfeed.client.api.util.PatientUrlUtil;
 
@@ -22,16 +25,25 @@ public class HieAtomFeedEventWorker implements EventWorker {
 	
 	private HttpClient httpClient;
 	
+	private Gson gson;
+	
 	private PatientService patientService;
 	
 	private PatientTranslator patientTranslator;
 	
+	private EncounterTranslatorImpl encounterTranslator;
+	
+	private EncounterService encounterService;
+	
 	public HieAtomFeedEventWorker(HttpClient httpClient, HieAtomFeedProperties properties, PatientService patientService,
-	    PatientTranslator patientTranslator) {
+	    PatientTranslator patientTranslator, EncounterTranslatorImpl encounterTranslator, EncounterService encounterService) {
 		this.properties = properties;
 		this.httpClient = httpClient;
 		this.patientService = patientService;
 		this.patientTranslator = patientTranslator;
+		this.encounterTranslator = encounterTranslator;
+		this.encounterService = encounterService;
+		this.gson = new Gson();
 	}
 	
 	@Override
@@ -43,6 +55,8 @@ public class HieAtomFeedEventWorker implements EventWorker {
 		}
 		if (event.getTitle().equals("Patient")) {
 			processPatientEvent(event);
+		} else if (event.getTitle().equals("Encounter")) {
+			processEncounterFeed(event);
 		}
 		
 	}
@@ -54,14 +68,12 @@ public class HieAtomFeedEventWorker implements EventWorker {
 		try {
 			Patient patient = patientService.getPatientByUuid(patientUuid);
 			if (patient == null) {
-				log.error("HeiAtom feed error : Could not get patient with uuid " + patientUuid);
+				log.error("HieAtom feed error : Could not get patient with uuid " + patientUuid);
 				return;
 			}
 			org.hl7.fhir.r4.model.Patient hl7Patient = patientTranslator.toFhirResource(patient);
-			
-			Gson gson = new Gson();
 			String fhirJson = gson.toJson(hl7Patient);
-			
+			log.error(fhirJson);
 			//TODO : Push fhir json object to hie server
 			
 		}
@@ -72,6 +84,28 @@ public class HieAtomFeedEventWorker implements EventWorker {
 			log.error(e.getMessage());
 			e.printStackTrace();
 		}
+	}
+	
+	private void processEncounterFeed(Event event) {
+		log.info("Processing Encounter Feed");
+		String encounterUuid = PatientUrlUtil.getFulUuidVarFromUrl(event.getContent());
+		log.error("Encounter uuid " + encounterUuid);
+		Encounter encounter = encounterService.getEncounterByUuid(encounterUuid);
+		if (encounter == null) {
+			log.error("Hie Atom feed error : Can not get encounter with uuid - " + encounterUuid);
+			return;
+		}
+		log.error("Encounter type " + encounter.getEncounterType().getName());
+		if (!properties.getEncounterTypes().contains(encounter.getEncounterType().getName())) {
+			log.error("Hie Atom feed : Skipping encounter tyoe- " + encounter.getEncounterType().getName());
+			return;
+		}
+		
+		org.hl7.fhir.r4.model.Encounter hl7Encounter = encounterTranslator.toFhirResource(encounter);
+		String fhirJson = gson.toJson(hl7Encounter);
+		log.error(fhirJson);
+		
+		//TODO : Push fhir resource to Hie endpoint
 	}
 	
 	private HttpHeaders getHttpHeaders() {

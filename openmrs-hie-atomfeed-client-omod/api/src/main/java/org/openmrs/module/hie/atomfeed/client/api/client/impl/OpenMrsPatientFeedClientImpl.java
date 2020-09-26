@@ -4,12 +4,16 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.bahmni.webclients.HttpClient;
+import org.ict4h.atomfeed.client.service.AtomFeedClient;
 import org.ict4h.atomfeed.client.service.EventWorker;
 import org.joda.time.DateTime;
+import org.openmrs.api.EncounterService;
 import org.openmrs.api.PatientService;
 import org.openmrs.module.fhir2.api.translators.PatientTranslator;
+import org.openmrs.module.fhir2.api.translators.impl.EncounterTranslatorImpl;
 import org.openmrs.module.hie.atomfeed.client.api.HieAtomFeedProperties;
 import org.openmrs.module.hie.atomfeed.client.api.client.OpenMrsPatientFeedClient;
+import org.openmrs.module.hie.atomfeed.client.api.util.FeedNames;
 import org.openmrs.module.hie.atomfeed.client.api.worker.HieAtomFeedEventWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,19 +30,29 @@ public class OpenMrsPatientFeedClientImpl extends OpenMRSFeedClient implements O
 	
 	private PatientTranslator patientTranslator;
 	
+	private EncounterTranslatorImpl encounterTranslator;
+	
+	private EncounterService encounterService;
+	
 	@Autowired
 	public OpenMrsPatientFeedClientImpl(HieAtomFeedProperties properties, PlatformTransactionManager transactionManager,
-	    PatientService patientService, PatientTranslator patientTranslator) {
+	    PatientService patientService, PatientTranslator patientTranslator, EncounterTranslatorImpl encounterTranslator,
+	    EncounterService encounterService) {
 		super(properties, transactionManager);
 		this.patientService = patientService;
 		this.patientTranslator = patientTranslator;
+		this.encounterTranslator = encounterTranslator;
+		this.encounterService = encounterService;
 	}
 	
 	@Override
 	public void processFeed() {
 		try {
-			log.error("HieOpenmrsClientFeedImpl: processing feed " + DateTime.now());
 			getAtomFeedClient().processEvents();
+			for (AtomFeedClient feedclient : getAtomFeedClients()) {
+				log.error("HieOpenmrsClientFeedImpl: processing feed " + DateTime.now());
+				feedclient.processEvents();
+			}
 		}
 		catch (Exception e) {
 			try {
@@ -61,8 +75,19 @@ public class OpenMrsPatientFeedClientImpl extends OpenMRSFeedClient implements O
 	}
 	
 	@Override
+	protected String getFeedUri(HieAtomFeedProperties properties, String type) {
+		if (type.equals(FeedNames.PATIENT_FEED_TYPE)) {
+			return properties.getPatientFeedUri();
+		} else if (type.equals(FeedNames.ENCOUNTER_FEED_TYPE)) {
+			return properties.getEncounterFeedUri();
+		}
+		return null;
+	}
+	
+	@Override
 	protected EventWorker createWorker(HttpClient authenticatedWebClient, HieAtomFeedProperties properties) {
-		return new HieAtomFeedEventWorker(authenticatedWebClient, properties, patientService, patientTranslator);
+		return new HieAtomFeedEventWorker(authenticatedWebClient, properties, patientService, patientTranslator,
+		        encounterTranslator, encounterService);
 	}
 	
 	private boolean isUnauthorised(Exception e) {

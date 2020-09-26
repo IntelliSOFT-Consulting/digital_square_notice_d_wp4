@@ -13,10 +13,13 @@ import org.ict4h.atomfeed.client.service.AtomFeedClient;
 import org.ict4h.atomfeed.client.service.EventWorker;
 import org.openmrs.module.atomfeed.transaction.support.AtomFeedSpringTransactionManager;
 import org.openmrs.module.hie.atomfeed.client.api.HieAtomFeedProperties;
+import org.openmrs.module.hie.atomfeed.client.api.util.FeedNames;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class OpenMRSFeedClient {
 	
@@ -27,6 +30,8 @@ public abstract class OpenMRSFeedClient {
 	private Log logger = LogFactory.getLog(OpenMRSFeedClient.class);
 	
 	private HieAtomFeedProperties properties;
+	
+	private List<AtomFeedClient> feedClients = new ArrayList<AtomFeedClient>();
 	
 	public OpenMRSFeedClient(HieAtomFeedProperties properties, PlatformTransactionManager transactionManager) {
 		this.properties = properties;
@@ -55,6 +60,14 @@ public abstract class OpenMRSFeedClient {
 		return atomFeedClient;
 	}
 	
+	public List<AtomFeedClient> getAtomFeedClients() {
+		if (feedClients == null || feedClients.size() == 0) {
+			feedClients.add(createAtomFeedClient(FeedNames.PATIENT_FEED_TYPE));
+			feedClients.add(createAtomFeedClient(FeedNames.ENCOUNTER_FEED_TYPE));
+		}
+		return feedClients;
+	}
+	
 	public org.ict4h.atomfeed.client.service.FeedClient createAtomFeedClient() {
 		URI uriForFeed = getURIForFeed(getFeedUri(properties));
 		ConnectionDetails connectionDetails = createConnectionDetails(properties);
@@ -67,12 +80,25 @@ public abstract class OpenMRSFeedClient {
 		return atomFeedClient;
 	}
 	
+	public AtomFeedClient createAtomFeedClient(String feedType) {
+		URI uriForFeed = getURIForFeed(getFeedUri(properties, feedType));
+		ConnectionDetails connectionDetails = createConnectionDetails(properties);
+		HttpClient httpClient = new HttpClient(connectionDetails, new OpenMRSLoginAuthenticator(connectionDetails));
+		ClientCookies cookies = httpClient.getCookies(uriForFeed);
+		EventWorker openMRSEventWorker = createWorker(httpClient, properties);
+		AtomFeedSpringTransactionManager txMgr = new AtomFeedSpringTransactionManager(transactionManager);
+		return new AtomFeedClient(new AllFeeds(properties, cookies), new AllMarkersJdbcImpl(txMgr),
+		        new AllFailedEventsJdbcImpl(txMgr), properties, txMgr, uriForFeed, openMRSEventWorker);
+	}
+	
 	private ConnectionDetails createConnectionDetails(HieAtomFeedProperties properties) {
 		return new ConnectionDetails(properties.getOpenmrsAuthUri(), properties.getOpenmrsUser(),
 		        properties.getOpenMrsPassword(), properties.getConnectTimeout(), properties.getReadTimeout());
 	}
 	
 	protected abstract String getFeedUri(HieAtomFeedProperties properties);
+	
+	protected abstract String getFeedUri(HieAtomFeedProperties properties, String type);
 	
 	protected abstract EventWorker createWorker(HttpClient authenticatedWebClient, HieAtomFeedProperties properties);
 	

@@ -3,6 +3,9 @@ package org.openmrs.module.hie.atomfeed.client.api;
 import org.ict4h.atomfeed.client.AtomFeedProperties;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class HieAtomFeedProperties extends AtomFeedProperties {
 	
@@ -21,6 +24,8 @@ public class HieAtomFeedProperties extends AtomFeedProperties {
 	private String openmrsUser = "admin";
 	
 	private String openMrsPassword = "test";
+	
+	private List<String> encounterTypes = new ArrayList<String>();
 	
 	private int feedMaxFailedEvents = 10000;
 	
@@ -54,6 +59,12 @@ public class HieAtomFeedProperties extends AtomFeedProperties {
 	
 	public String getOpenMrsPassword() {
 		return openMrsPassword;
+	}
+	
+	public List<String> getEncounterTypes() {
+		encounterTypes.add("Consultation");
+		encounterTypes.add("LAB_RESULT");
+		return encounterTypes;
 	}
 	
 	@Override

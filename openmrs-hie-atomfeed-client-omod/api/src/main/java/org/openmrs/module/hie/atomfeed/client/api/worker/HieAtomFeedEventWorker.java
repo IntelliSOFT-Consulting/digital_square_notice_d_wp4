@@ -55,7 +55,7 @@ public class HieAtomFeedEventWorker implements EventWorker {
 		}
 		if (event.getTitle().equals("Patient")) {
 			processPatientEvent(event);
-		} else if (event.getTitle().equals("Encounter")) {
+		} else if (event.getTitle().equals(properties.getLabResultEventTitle())) {
 			processEncounterFeed(event);
 		}
 		

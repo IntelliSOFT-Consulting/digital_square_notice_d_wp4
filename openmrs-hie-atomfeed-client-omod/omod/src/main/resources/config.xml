@@ -35,13 +35,11 @@
     </require_modules>
 	
 	
-	<!-- AOP
 	<advice>
-		<point>org.openmrs.api.FormService</point>
-		<class>@MODULE_PACKAGE@.advice.DuplicateFormAdvisor</class>
+		<point>org.openmrs.api.EncounterService</point>
+		<class>org.openmrs.module.hie.atomfeed.client.api.server.EncounterAdvice</class>
 	</advice>
-	 /AOP -->
-	
+
 	
 	<!-- Required Privileges 
 	<privilege>

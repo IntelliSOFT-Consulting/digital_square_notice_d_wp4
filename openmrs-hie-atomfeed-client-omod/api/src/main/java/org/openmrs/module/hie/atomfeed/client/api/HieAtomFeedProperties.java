@@ -25,6 +25,8 @@ public class HieAtomFeedProperties extends AtomFeedProperties {
 	
 	private String openMrsPassword = "test";
 	
+	private String labResultEventTitle = "Lab Encounter";
+	
 	private List<String> encounterTypes = new ArrayList<String>();
 	
 	private int feedMaxFailedEvents = 10000;
@@ -59,6 +61,10 @@ public class HieAtomFeedProperties extends AtomFeedProperties {
 	
 	public String getOpenMrsPassword() {
 		return openMrsPassword;
+	}
+	
+	public String getLabResultEventTitle() {
+		return labResultEventTitle;
 	}
 	
 	public List<String> getEncounterTypes() {

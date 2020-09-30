@@ -9,6 +9,8 @@ import org.ict4h.atomfeed.client.service.EventWorker;
 import org.joda.time.DateTime;
 import org.openmrs.api.EncounterService;
 import org.openmrs.api.PatientService;
+
+import org.openmrs.module.fhir2.api.translators.ObservationTranslator;
 import org.openmrs.module.fhir2.api.translators.PatientTranslator;
 import org.openmrs.module.fhir2.api.translators.impl.EncounterTranslatorImpl;
 import org.openmrs.module.hie.atomfeed.client.api.HieAtomFeedProperties;
@@ -34,15 +36,18 @@ public class OpenMrsPatientFeedClientImpl extends OpenMRSFeedClient implements O
 	
 	private EncounterService encounterService;
 	
+	private ObservationTranslator observationTranslator;
+	
 	@Autowired
 	public OpenMrsPatientFeedClientImpl(HieAtomFeedProperties properties, PlatformTransactionManager transactionManager,
 	    PatientService patientService, PatientTranslator patientTranslator, EncounterTranslatorImpl encounterTranslator,
-	    EncounterService encounterService) {
+	    EncounterService encounterService, ObservationTranslator observationTranslator) {
 		super(properties, transactionManager);
 		this.patientService = patientService;
 		this.patientTranslator = patientTranslator;
 		this.encounterTranslator = encounterTranslator;
 		this.encounterService = encounterService;
+		this.observationTranslator = observationTranslator;
 	}
 	
 	@Override
@@ -87,7 +92,7 @@ public class OpenMrsPatientFeedClientImpl extends OpenMRSFeedClient implements O
 	@Override
 	protected EventWorker createWorker(HttpClient authenticatedWebClient, HieAtomFeedProperties properties) {
 		return new HieAtomFeedEventWorker(authenticatedWebClient, properties, patientService, patientTranslator,
-		        encounterTranslator, encounterService);
+		        encounterTranslator, encounterService, observationTranslator);
 	}
 	
 	private boolean isUnauthorised(Exception e) {

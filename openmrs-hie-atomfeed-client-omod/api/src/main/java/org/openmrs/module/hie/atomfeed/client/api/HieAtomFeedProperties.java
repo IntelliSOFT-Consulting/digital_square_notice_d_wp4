@@ -27,6 +27,14 @@ public class HieAtomFeedProperties extends AtomFeedProperties {
 	
 	private String labResultEventTitle = "Lab Encounter";
 	
+	private String fhirServerHost = "http://45.33.84.72:5001/fhir";
+	
+	private String getDefaultObsConcept = "fe769568-16da-4d9e-9c99-fbed0a8a60f5";
+	
+	private static final String fhirHostUser = "fhir";
+	
+	private static final String fhirHostPassword = "12345";
+	
 	private List<String> encounterTypes = new ArrayList<String>();
 	
 	private int feedMaxFailedEvents = 10000;
@@ -61,6 +69,14 @@ public class HieAtomFeedProperties extends AtomFeedProperties {
 	
 	public String getOpenMrsPassword() {
 		return openMrsPassword;
+	}
+	
+	public String getGetDefaultObsConcept() {
+		return getDefaultObsConcept;
+	}
+	
+	public String getFhirServerHost() {
+		return fhirServerHost;
 	}
 	
 	public String getLabResultEventTitle() {

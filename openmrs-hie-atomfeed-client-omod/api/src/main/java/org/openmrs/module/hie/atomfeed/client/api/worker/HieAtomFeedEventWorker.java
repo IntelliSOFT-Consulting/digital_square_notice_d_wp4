@@ -6,16 +6,22 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.bahmni.webclients.HttpClient;
 import org.bahmni.webclients.HttpHeaders;
+import org.hl7.fhir.r4.model.Observation;
 import org.ict4h.atomfeed.client.domain.Event;
 import org.ict4h.atomfeed.client.service.EventWorker;
 import org.openmrs.Encounter;
+import org.openmrs.Obs;
+import org.openmrs.Order;
 import org.openmrs.Patient;
 import org.openmrs.api.EncounterService;
 import org.openmrs.api.PatientService;
+import org.openmrs.module.fhir2.api.translators.ObservationTranslator;
 import org.openmrs.module.fhir2.api.translators.PatientTranslator;
 import org.openmrs.module.fhir2.api.translators.impl.EncounterTranslatorImpl;
 import org.openmrs.module.hie.atomfeed.client.api.HieAtomFeedProperties;
 import org.openmrs.module.hie.atomfeed.client.api.util.PatientUrlUtil;
+
+import java.util.Set;
 
 public class HieAtomFeedEventWorker implements EventWorker {
 	
@@ -33,16 +39,20 @@ public class HieAtomFeedEventWorker implements EventWorker {
 	
 	private EncounterTranslatorImpl encounterTranslator;
 	
+	private ObservationTranslator observationTranslator;
+	
 	private EncounterService encounterService;
 	
 	public HieAtomFeedEventWorker(HttpClient httpClient, HieAtomFeedProperties properties, PatientService patientService,
-	    PatientTranslator patientTranslator, EncounterTranslatorImpl encounterTranslator, EncounterService encounterService) {
+	    PatientTranslator patientTranslator, EncounterTranslatorImpl encounterTranslator, EncounterService encounterService,
+	    ObservationTranslator observationTranslator) {
 		this.properties = properties;
 		this.httpClient = httpClient;
 		this.patientService = patientService;
 		this.patientTranslator = patientTranslator;
 		this.encounterTranslator = encounterTranslator;
 		this.encounterService = encounterService;
+		this.observationTranslator = observationTranslator;
 		this.gson = new Gson();
 	}
 	
@@ -105,6 +115,17 @@ public class HieAtomFeedEventWorker implements EventWorker {
 		String fhirJson = gson.toJson(hl7Encounter);
 		log.error(fhirJson);
 		
+		Set<Obs> obsHashSet = encounter.getObs();
+		for (Obs obs : obsHashSet) {
+			log.error("uuid " + obs.getConcept().getUuid());
+			if (obs.getConcept().getUuid().equals(properties.getGetDefaultObsConcept())) {
+				
+				Observation hl7Observation = observationTranslator.toFhirResource(obs);
+				String obsFhirJson = gson.toJson(hl7Observation);
+				log.error(obsFhirJson);
+				
+			}
+		}
 		//TODO : Push fhir resource to Hie endpoint
 	}
 	

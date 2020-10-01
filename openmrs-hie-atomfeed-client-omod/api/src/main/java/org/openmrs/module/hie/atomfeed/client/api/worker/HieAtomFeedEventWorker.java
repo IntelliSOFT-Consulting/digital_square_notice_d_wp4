@@ -89,7 +89,7 @@ public class HieAtomFeedEventWorker implements EventWorker {
 			org.hl7.fhir.r4.model.Patient hl7Patient = patientTranslator.toFhirResource(patient);
 			String fhirJson = gson.toJson(hl7Patient);
 			log.error(fhirJson);
-			//TODO : Push fhir json object to hie server
+			postFhirResource(fhirJson);
 			
 		}
 		catch (JsonParseException e) {

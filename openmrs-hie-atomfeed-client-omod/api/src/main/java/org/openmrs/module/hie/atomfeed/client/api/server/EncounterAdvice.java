@@ -48,21 +48,16 @@ public class EncounterAdvice extends StaticMethodMatcherPointcutAdvisor implemen
 	
 	@Override
 	public Advice getAdvice() {
-		log.error("Getting new around advice");
 		return new EncounterSaveAroundAdvice();
 	}
 	
 	private class EncounterSaveAroundAdvice implements MethodInterceptor {
 		
 		public Object invoke(MethodInvocation invocation) throws Throwable {
-			
-			log.error("Before " + invocation.getMethod().getName() + ".");
-			
 			// the proceed() method does not have to be called
 			Object o = invocation.proceed();
 			Encounter encounter = (Encounter) o;
 			if (encounter.getEncounterType().getName().equals(DEFAULT_LAB_ENCOUNTER_TYPE)) {
-				log.error("After " + invocation.getMethod().getName() + ".\n\n");
 				saveEvent(encounter);
 			}
 			

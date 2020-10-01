@@ -14,7 +14,7 @@
     -->
 
     <changeSet id="create-hie-atom-feed-task-20200921000000" author="ekirapa">
-        <preConditions>
+        <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
                 SELECT COUNT(*) FROM scheduler_task_config WHERE name = "OpenMRS Atom Feed Hie Client Task";
             </sqlCheck>
@@ -27,7 +27,22 @@
             VALUES
             ('OpenMRS Atom Feed Hie Client Task', 'OpenMRS Atom Feed Hie Client Task',
             'org.openmrs.module.hie.atomfeed.client.api.task.AtomFeedClientTask',
-            TIMESTAMP(CURDATE()), 'MM/dd/yyyy HH:mm:ss', 120, TRUE, 1, NOW(), UUID());
+            TIMESTAMP(CURDATE()), 'MM/dd/yyyy HH:mm:ss', 15, TRUE, 1, NOW(), UUID());
+        </sql>
+    </changeSet>
+
+    <changeSet id="update-bahmni-lab-order-type-uuid-202009302030" author="ekirapa">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*) FROM order_type WHERE name="Lab Order";
+            </sqlCheck>
+        </preConditions>
+        <comment>
+            This is meant to change the uuid for the lab order order type to enable fhir2 module trnaslate observations
+            with lab orders.
+        </comment>
+        <sql>
+            UPDATE order_type SET uuid="52a447d3-a64a-11e3-9aeb-50e549534c5e" WHERE name="Lab Order";
         </sql>
     </changeSet>
 

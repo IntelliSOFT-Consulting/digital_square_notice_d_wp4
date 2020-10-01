@@ -55,7 +55,6 @@ public class OpenMrsPatientFeedClientImpl extends OpenMRSFeedClient implements O
 		try {
 			getAtomFeedClient().processEvents();
 			for (AtomFeedClient feedclient : getAtomFeedClients()) {
-				log.error("HieOpenmrsClientFeedImpl: processing feed " + DateTime.now());
 				feedclient.processEvents();
 			}
 		}

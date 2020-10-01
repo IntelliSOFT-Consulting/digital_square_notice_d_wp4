@@ -50,7 +50,6 @@ public class EncounterSaveService implements AfterReturningAdvice {
 	public void afterReturning(Object returnValue, Method method, Object[] objects, Object o1) throws Throwable {
 		if (method.getName().equals(SAVE_METHOD)
 		        && ((Encounter) returnValue).getEncounterType().getName().equals(DEFAULT_LAB_ENCOUNTER_TYPE)) {
-			log.error("\n Running on save method \n");
 			Object encounterUuid = PropertyUtils.getProperty(returnValue, "encounterUuid");
 			String url = String.format(getEncounterFeedUrl(), encounterUuid);
 			final Event event = new Event(UUID.randomUUID().toString(), TITLE, DateTime.now(), (URI) null, url, CATEGORY);

@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.StatusLine;
+import org.apache.http.auth.AuthenticationException;
 import org.bahmni.webclients.HttpClient;
 import org.bahmni.webclients.HttpHeaders;
 import org.hl7.fhir.r4.model.Observation;
@@ -19,8 +21,11 @@ import org.openmrs.module.fhir2.api.translators.ObservationTranslator;
 import org.openmrs.module.fhir2.api.translators.PatientTranslator;
 import org.openmrs.module.fhir2.api.translators.impl.EncounterTranslatorImpl;
 import org.openmrs.module.hie.atomfeed.client.api.HieAtomFeedProperties;
+import org.openmrs.module.hie.atomfeed.client.api.util.FhirServerStoreUtil;
 import org.openmrs.module.hie.atomfeed.client.api.util.PatientUrlUtil;
 
+import java.io.IOException;
+import java.util.HashSet;
 import java.util.Set;
 
 public class HieAtomFeedEventWorker implements EventWorker {
@@ -115,19 +120,36 @@ public class HieAtomFeedEventWorker implements EventWorker {
 		String fhirJson = gson.toJson(hl7Encounter);
 		log.error(fhirJson);
 		
+		postFhirResource(fhirJson);
+		
 		Set<Obs> obsHashSet = encounter.getObs();
+		HashSet<String> observationHashSet = new HashSet<String>();
 		for (Obs obs : obsHashSet) {
-			log.error("uuid " + obs.getConcept().getUuid());
 			if (obs.getConcept().getUuid().equals(properties.getGetDefaultObsConcept())) {
 				
 				Observation hl7Observation = observationTranslator.toFhirResource(obs);
 				String obsFhirJson = gson.toJson(hl7Observation);
 				log.error(obsFhirJson);
+				observationHashSet.add(obsFhirJson);
 				
 			}
 		}
-		//TODO : Push fhir resource to Hie endpoint
+		
+		for (String obsFhirResource : observationHashSet) {
+			postFhirResource(obsFhirResource);
+		}
 	}
+	
+	private void postFhirResource(String fhirResource) {
+        try {
+            StatusLine statusLine = FhirServerStoreUtil.postFhirResource(properties, fhirResource);
+            if (statusLine.getStatusCode() != 200) {
+                log.error("FHIR Server error : " + statusLine.getStatusCode() + " \n Error message " + statusLine.getReasonPhrase());
+            }
+        } catch (IOException | AuthenticationException e) {
+            e.printStackTrace();
+        }
+    }
 	
 	private HttpHeaders getHttpHeaders() {
 		HttpHeaders httpHeaders = new HttpHeaders();

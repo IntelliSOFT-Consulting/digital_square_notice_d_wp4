@@ -31,9 +31,9 @@ public class HieAtomFeedProperties extends AtomFeedProperties {
 	
 	private String getDefaultObsConcept = "fe769568-16da-4d9e-9c99-fbed0a8a60f5";
 	
-	private static final String fhirHostUser = "fhir";
+	public static final String fhirHostUser = "fhir";
 	
-	private static final String fhirHostPassword = "12345";
+	public static final String fhirHostPassword = "12345";
 	
 	private List<String> encounterTypes = new ArrayList<String>();
 	

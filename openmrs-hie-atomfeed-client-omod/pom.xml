@@ -67,7 +67,11 @@
             <artifactId>httpclient</artifactId>
             <version>4.3.2</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.bahmni.module</groupId>
+            <artifactId>web-clients</artifactId>
+            <version>0.91-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 	<repositories>
 		<repository>
@@ -89,7 +93,15 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
-	</repositories>
+        <repository>
+            <id>repo.mybahmni.org</id>
+            <name>bahmni-artifactory-snapshots</name>
+            <url>http://repo.mybahmni.org/artifactory/snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 	<pluginRepositories>
 		<pluginRepository>
 			<id>openmrs-repo</id>

@@ -1,9 +1,12 @@
-${moduleName}
+HIE Atom Feed Client
 ==========================
 
 Description
 -----------
-This is a very basic module which can be used as a starting point in creating a new module.
+This module serves as an Atom feed client and performs the following functions:
+1) Extract Atom feeds relating to patient demographics and identifiers, convert them to FHIR resources and send them to an Interoperability Layer endpoint
+2) Extract Atom feeds relating to clinical encounters and observations, convert them to FHIR resources and send them to an Interoperability Layer endpoint
+
 
 Building from Source
 --------------------
@@ -28,3 +31,7 @@ If uploads are not allowed from the web (changable via a runtime property), you 
 into the ~/.OpenMRS/modules folder.  (Where ~/.OpenMRS is assumed to be the Application 
 Data Directory that the running openmrs is currently using.)  After putting the file in there 
 simply restart OpenMRS/tomcat and the module will be loaded and started.
+
+Global configuration values
+---------------------------
+

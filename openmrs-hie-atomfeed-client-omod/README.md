@@ -32,6 +32,8 @@ into the ~/.OpenMRS/modules folder.  (Where ~/.OpenMRS is assumed to be the Appl
 Data Directory that the running openmrs is currently using.)  After putting the file in there 
 simply restart OpenMRS/tomcat and the module will be loaded and started.
 
-Global configuration values
----------------------------
+Global configuration properties
+-------------------------------
+In order for the application to sun as intended, the following GLobal Properties values have to be set:
+
 

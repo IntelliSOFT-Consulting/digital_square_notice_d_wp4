@@ -56,6 +56,56 @@
 			Atom feed id.
 		</description>
 	</globalProperty>
+    <globalProperty>
+        <property>hie.fhir.server.host</property>
+        <defaultValue>http://45.33.84.72:5001/fhir</defaultValue>
+        <description>Endpoint on the fhir server that will receive fhir resources from the MRS.</description>
+    </globalProperty>
+    <globalProperty>
+        <property>hie.obs.concepts</property>
+        <defaultValue>fe769568-16da-4d9e-9c99-fbed0a8a60f5</defaultValue>
+        <description>Concept(s) that the atom feed client will be required to process.</description>
+    </globalProperty>
+    <globalProperty>
+        <property>hie.fhir.server.user</property>
+        <defaultValue>fhir</defaultValue>
+        <description>User name used to authenticate with the fhir server.</description>
+    </globalProperty>
+    <globalProperty>
+        <property>hie.fhir.server.password</property>
+        <defaultValue>12345</defaultValue>
+        <description>Password used to authenticate with the fhir server.</description>
+    </globalProperty>
+    <globalProperty>
+        <property>hie.openmrs.uri</property>
+        <defaultValue>http://localhost:8050</defaultValue>
+        <description>Openmrs Uri</description>
+    </globalProperty>
+    <globalProperty>
+        <property>hie.openmrs.auth.uri</property>
+        <defaultValue>http://localhost:8050/openmrs/ws/rest/v1/session</defaultValue>
+        <description>Openmrs authentication Uri</description>
+    </globalProperty>
+    <globalProperty>
+        <property>hie.patient.feed.uri</property>
+        <defaultValue>http://localhost:8050/openmrs/ws/atomfeed/patient/recent</defaultValue>
+        <description>Openmrs patient atom feed uri</description>
+    </globalProperty>
+    <globalProperty>
+        <property>hie.encounter.feed.uri</property>
+        <defaultValue>http://localhost:8050/openmrs/ws/atomfeed/encounter/recent</defaultValue>
+        <description>Openmrs encounter atom feed uri</description>
+    </globalProperty>
+    <globalProperty>
+        <property>hie.openmrs.api.auth.user</property>
+        <defaultValue>admin</defaultValue>
+        <description>Openmrs API authentication user name</description>
+    </globalProperty>
+    <globalProperty>
+        <property>hie.openmrs.api.auth.password</property>
+        <defaultValue>test</defaultValue>
+        <description>Openmrs API authentication password</description>
+    </globalProperty>
 
 	<!--
 	<dwr>

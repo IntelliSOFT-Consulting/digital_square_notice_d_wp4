@@ -34,6 +34,6 @@ simply restart OpenMRS/tomcat and the module will be loaded and started.
 
 Global configuration properties
 -------------------------------
-In order for the application to sun as intended, the following Global Properties have to be set:
+In order for the application to sun as intended, the following OpenMRS Global Properties have to be set:
 
 

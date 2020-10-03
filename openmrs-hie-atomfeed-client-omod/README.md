@@ -3,8 +3,8 @@ HIE Atom Feed Client
 
 Description
 -----------
-This module serves as an Atom feed client and performs the following functions:
-1) Extract Atom feeds relating to patient demographics and identifiers, convert them to FHIR resources and send them to an Interoperability Layer endpoint
+This module contributes to the Integrated Patient Level Indicator Reporting by extracting patient data and sending it to a longitudinal patient record. It consumes atom feeds published by the atom-feed module and performs the following functions:
+1) Extracts Atom feeds relating to patient demographics and identifiers, convert them to FHIR resources and send them to an Interoperability Layer endpoint
 2) Extract Atom feeds relating to clinical encounters and observations, convert them to FHIR resources and send them to an Interoperability Layer endpoint
 
 

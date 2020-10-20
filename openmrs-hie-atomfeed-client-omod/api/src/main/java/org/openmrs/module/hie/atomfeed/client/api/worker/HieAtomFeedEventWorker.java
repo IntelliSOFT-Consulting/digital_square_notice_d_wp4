@@ -9,6 +9,7 @@ import org.apache.http.auth.AuthenticationException;
 import org.bahmni.webclients.HttpClient;
 import org.bahmni.webclients.HttpHeaders;
 import org.hl7.fhir.r4.model.Observation;
+import org.hl7.fhir.r4.model.ResourceType;
 import org.ict4h.atomfeed.client.domain.Event;
 import org.ict4h.atomfeed.client.service.EventWorker;
 import org.openmrs.Encounter;
@@ -17,10 +18,12 @@ import org.openmrs.Order;
 import org.openmrs.Patient;
 import org.openmrs.api.EncounterService;
 import org.openmrs.api.PatientService;
+import org.openmrs.api.context.Context;
 import org.openmrs.module.fhir2.api.translators.ObservationTranslator;
 import org.openmrs.module.fhir2.api.translators.PatientTranslator;
 import org.openmrs.module.fhir2.api.translators.impl.EncounterTranslatorImpl;
 import org.openmrs.module.hie.atomfeed.client.api.HieAtomFeedProperties;
+import org.openmrs.module.hie.atomfeed.client.api.client.FhirClient;
 import org.openmrs.module.hie.atomfeed.client.api.util.FhirServerStoreUtil;
 import org.openmrs.module.hie.atomfeed.client.api.util.PatientUrlUtil;
 
@@ -88,8 +91,7 @@ public class HieAtomFeedEventWorker implements EventWorker {
 			}
 			org.hl7.fhir.r4.model.Patient hl7Patient = patientTranslator.toFhirResource(patient);
 			String fhirJson = gson.toJson(hl7Patient);
-			log.error(fhirJson);
-			postFhirResource(fhirJson);
+			postFhirResource(fhirJson, ResourceType.Patient);
 			
 		}
 		catch (JsonParseException e) {
@@ -120,7 +122,7 @@ public class HieAtomFeedEventWorker implements EventWorker {
 		String fhirJson = gson.toJson(hl7Encounter);
 		log.error(fhirJson);
 		
-		postFhirResource(fhirJson);
+		postFhirResource(fhirJson, ResourceType.Encounter);
 		
 		Set<Obs> obsHashSet = encounter.getObs();
 		HashSet<String> observationHashSet = new HashSet<String>();
@@ -136,13 +138,13 @@ public class HieAtomFeedEventWorker implements EventWorker {
 		}
 		
 		for (String obsFhirResource : observationHashSet) {
-			postFhirResource(obsFhirResource);
+			postFhirResource(obsFhirResource, ResourceType.Observation);
 		}
 	}
 	
-	private void postFhirResource(String fhirResource) {
+	private void postFhirResource(String fhirResource, ResourceType resourceType) {
         try {
-            StatusLine statusLine = FhirServerStoreUtil.postFhirResource(properties, fhirResource);
+            StatusLine statusLine = FhirServerStoreUtil.postFhirResource(properties, fhirResource, resourceType);
             if (statusLine.getStatusCode() != 200) {
                 log.error("FHIR Server error : " + statusLine.getStatusCode() + " \n Error message " + statusLine.getReasonPhrase());
             }

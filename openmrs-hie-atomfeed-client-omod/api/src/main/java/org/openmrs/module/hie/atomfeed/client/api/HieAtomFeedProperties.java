@@ -29,11 +29,17 @@ public class HieAtomFeedProperties extends AtomFeedProperties {
 	
 	private String fhirServerHost = "http://45.33.84.72:5001/fhir";
 	
+	private String fhirServerPatientEndpoint = "http://45.33.84.72:5001/fhir/patient";
+	
+	private String fhirServerObservationEndpoint = "http://45.33.84.72:5001/fhir/oobservatioon";
+	
+	private String fhirServerEncounterEndpoint = "http://45.33.84.72:5001/fhir/encounter";
+	
 	private String getDefaultObsConcept = "fe769568-16da-4d9e-9c99-fbed0a8a60f5";
 	
-	public static final String fhirHostUser = "fhir";
+	private String fhirHostUser = "fhir";
 	
-	public static final String fhirHostPassword = "12345";
+	private String fhirHostPassword = "12345";
 	
 	private List<String> encounterTypes = new ArrayList<String>();
 	
@@ -84,9 +90,28 @@ public class HieAtomFeedProperties extends AtomFeedProperties {
 	}
 	
 	public List<String> getEncounterTypes() {
-		encounterTypes.add("Consultation");
 		encounterTypes.add("LAB_RESULT");
 		return encounterTypes;
+	}
+	
+	public String getFhirServerPatientEndpoint() {
+		return fhirServerPatientEndpoint;
+	}
+	
+	public String getFhirHostUser() {
+		return fhirHostUser;
+	}
+	
+	public String getFhirHostPassword() {
+		return fhirHostPassword;
+	}
+	
+	public String getFhirServerObservationEndpoint() {
+		return fhirServerObservationEndpoint;
+	}
+	
+	public String getFhirServerEncounterEndpoint() {
+		return fhirServerEncounterEndpoint;
 	}
 	
 	@Override

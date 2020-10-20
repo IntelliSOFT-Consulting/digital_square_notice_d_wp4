@@ -30,6 +30,20 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.openmrs.api</groupId>
+            <artifactId>openmrs-api</artifactId>
+            <version>${openMRSVersion}</version>
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.openmrs.api</groupId>
+            <artifactId>openmrs-api</artifactId>
+            <version>${openMRSVersion}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.ict4h.openmrs</groupId>
             <artifactId>openmrs-atomfeed-common</artifactId>
             <version>${openmrsAtomfeedVersion}</version>
@@ -132,5 +146,6 @@
         <atomfeed.version>1.9.4</atomfeed.version>
         <openMRSWebServicesVersion>2.20.0</openMRSWebServicesVersion>
         <openmrsFhir2Version>1.1.0-SNAPSHOT</openmrsFhir2Version>
+        <openMRSVersion>2.1.1</openMRSVersion>
     </properties>
 </project>

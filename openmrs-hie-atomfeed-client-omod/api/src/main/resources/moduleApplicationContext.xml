@@ -34,4 +34,13 @@
         </property>
     </bean>
 
+    <bean parent="serviceContext">
+        <property name="moduleService">
+            <list>
+                <value>org.openmrs.module.hie.atomfeed.client.api.client.FhirClient</value>
+                <ref bean="hieFhirClient"/>
+            </list>
+        </property>
+    </bean>
+
 </beans>

@@ -7,15 +7,19 @@ import org.bahmni.webclients.HttpClient;
 import org.ict4h.atomfeed.client.service.AtomFeedClient;
 import org.ict4h.atomfeed.client.service.EventWorker;
 import org.joda.time.DateTime;
+import org.openmrs.Patient;
 import org.openmrs.api.EncounterService;
 import org.openmrs.api.PatientService;
 
+import org.openmrs.api.context.Context;
 import org.openmrs.module.fhir2.api.translators.ObservationTranslator;
 import org.openmrs.module.fhir2.api.translators.PatientTranslator;
 import org.openmrs.module.fhir2.api.translators.impl.EncounterTranslatorImpl;
 import org.openmrs.module.hie.atomfeed.client.api.HieAtomFeedProperties;
+import org.openmrs.module.hie.atomfeed.client.api.client.FhirClient;
 import org.openmrs.module.hie.atomfeed.client.api.client.OpenMrsPatientFeedClient;
 import org.openmrs.module.hie.atomfeed.client.api.util.FeedNames;
+import org.openmrs.module.hie.atomfeed.client.api.util.FhirServerStoreUtil;
 import org.openmrs.module.hie.atomfeed.client.api.worker.HieAtomFeedEventWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -41,7 +45,7 @@ public class OpenMrsPatientFeedClientImpl extends OpenMRSFeedClient implements O
 	@Autowired
 	public OpenMrsPatientFeedClientImpl(HieAtomFeedProperties properties, PlatformTransactionManager transactionManager,
 	    PatientService patientService, PatientTranslator patientTranslator, EncounterTranslatorImpl encounterTranslator,
-	    EncounterService encounterService, ObservationTranslator observationTranslator) {
+	    EncounterService encounterService, ObservationTranslator observationTranslator, FhirClient fhirClient) {
 		super(properties, transactionManager);
 		this.patientService = patientService;
 		this.patientTranslator = patientTranslator;

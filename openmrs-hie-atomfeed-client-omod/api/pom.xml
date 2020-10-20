@@ -3,6 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
     <dependencies>
         <dependency>
+            <groupId>org.openmrs.api</groupId>
+            <artifactId>openmrs-api</artifactId>
+            <type>jar</type>
+        </dependency>
+        <dependency>
             <groupId>org.ict4h.openmrs</groupId>
             <artifactId>openmrs-atomfeed-common</artifactId>
             <version>${openmrsAtomfeedVersion}</version>

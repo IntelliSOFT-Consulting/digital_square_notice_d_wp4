@@ -121,4 +121,5 @@ ANC (Blood);
 RBC indices;
 Blood Bank Screening Test;
 MCH;
-D-dimer;",Blood,"",Sample,N/A,"",""
+D-dimer;
+HIV VIRAL LOAD;",Blood,,Sample,N/A,,

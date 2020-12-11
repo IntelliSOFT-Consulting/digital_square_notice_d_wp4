@@ -1,5 +1,0 @@
-Uuid,Void/Retire,Fully specified name:en,Short name:en,Description:en,...,Normal low,Normal high,Allow decimals,Display precision,_version:1,_order:5,Data class,Data type,Answers
-f06a9c94-d1f8-4cce-9799-6c8db991e66d,,Mtiba Transaction Number,Mtiba Tx Number,Mtiba Transaction Number,,,,,,,,Question,Text,
-61e604a4-23d4-47b1-b3bc-a8c7272dcc22,,Registered on Mtiba,Registered on Mtiba,Has client been registered on Mtiba,,,,,,,,Question,Coded,"Yes ; 
-No ;"
-a555b095-4cda-4d76-9237-66e7397622ee,"",Mtiba registeration,"","","","","","","","","",Misc,N/A,""

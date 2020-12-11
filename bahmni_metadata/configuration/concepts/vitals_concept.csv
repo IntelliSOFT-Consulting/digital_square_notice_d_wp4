@@ -1,0 +1,35 @@
+Uuid,Void/Retire,Fully specified name:en,Short name:en,Description:en,...,Normal low,Normal high,Allow decimals,Display precision,_version:1,_order:1,Data class,Data type,Answers
+105538BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB,,Walking,,,,,,,,,,Misc,N/A,
+110404BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB,,"Stretcher ",,,,,,,,,,Misc,N/A,
+110405BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB,,Wheelchair,,,,,,,,,,Misc,N/A,
+4b7c9778-2897-4068-bb9c-f8d11e926566,,Carried,,,,,,,,,,Misc,N/A,
+2080BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB,,MODE OF TRANSPORT OF ARRIVAL AT HOSPITAL,Mode of Arrival,,,,,,,,,Question,Coded,"Walking ; 
+Stretcher ;
+Wheelchair ; 
+Carried"
+074e7a4b-42d4-42f4-a1b2-e9be9eca3ea2,,"Resuscitation ",,,,,,,,,,Misc,N/A,
+47511d26-3f66-426f-b2d9-f81f2ead28c8,,Emergent,,,,,,,,,,Misc,N/A,
+3b031719-761f-49b9-be83-4f053bead849,,Urgent,,,,,,,,,,Misc,N/A,
+fc36d9aa-24de-474f-9fd8-e40cf244d490,,Less Urgent,,,,,,,,,,Misc,N/A,
+44fafcd4-074a-41ed-bb6a-c0beb85ecc8c,,Non-Emergent,,,,,,,,,,Misc,N/A,
+107008BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB,,"Triage level ",,,,,,,,,,Question,Coded,"Resuscitation ;
+Emergent ; 
+Urgent ; 
+Less Urgent ; 
+Non-Emergent"
+d8450c8b-7953-4d84-8c63-b89569e4a7a1,,Blood pressure (mmHg),BP (mmHg),,,,,yes,1,,,Finding,Numeric,
+519742fa-d204-4280-9698-f8842a7653c2,,Pulse Rate,PR (/min),,,,,yes,1,,,Finding,Numeric,
+6a2c1bf8-27d4-42b9-a1aa-aa9860db8609,,"Respiratory rate ",RR (/min),,,,,yes,1,,,Finding,Numeric,
+c3838414-3f10-11e4-adec-0800271c1b75,,SPO2,SPO2(%),,,97.0,,yes,1,,,Finding,Numeric,
+126457BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB,,"AVPU ",,"Indicate Alert, Voice, Pain, Unresponsive",,,,,,,,Question,Text,
+bf473c91-a548-4a72-a30b-8c28db502fd7,,RBS,RBS (mmol/L),,,,,yes,1,,,Finding,Numeric,
+c37bd733-3f10-11e4-adec-0800271c1b75,,Temperature,Temp (C),,,36.1,37.2,yes,1,,,Finding,Numeric,
+2302e9df-8a12-4a26-9033-98b0d7090298,,Pain Score (/10),,,,,,,,,,"Finding ",Numeric,
+9839695b-d9c5-4f70-a7d7-156eacf91386,,Allergies,,,,,,,,,,Question,Text,
+110321BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB,,Medication,,,,,,,,,,Question,Text,
+1913BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB,,PAST MEDICAL HISTORY,Past Medical History,,,,,,,,,Question,Coded,
+1596BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB,,Date of last menstrual period,Last Menstrual Period,,,,,,,,,Question,Date,
+4c8c81c1-ebdf-4775-8277-969769ab2a21,,Last Meal,,,,,,,,,,Question,Text,
+94fb68a9-975a-4f36-b1b3-1c46a0755093,,Events leading to illness/injury,,,,,,,,,,Question,Text,
+1189BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB,"",Vital Signs,"","","","","","","","","",Misc,N/A,""
+5d13ab04-6d9c-44fe-9b8c-496bff8ddfac,"",Sample History,"","","","","","","","","",Misc,N/A,""

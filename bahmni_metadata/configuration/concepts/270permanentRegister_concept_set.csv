@@ -1,0 +1,32 @@
+Uuid,Answers,Members,Fully specified name:en,Short name:en,Data class,Data type,_version:1,_order:124
+27a847c6-dc9a-4e68-ae6b-67271a61fd23,"Diabetes mellitus, type 1 ;
+Diabetes mellitus, type 2 ;Gestational Diabetes Mellitus ; 
+Diabetes secondary to other causes ; 
+Hypertension,Diagnosis ;
+Preeclampsia",,Diagnosis Type,,Question,Coded,,
+af75d3ed-4c7d-4bfb-959c-7aba5d61af93,"Diet and Physical Activity Drugs ; 
+OGLAs,Treatment Drug ; 
+Insulin ; 
+Anti-hypertensives Drugs ; 
+Herbal, Treatment Drugs; Other Treatment Drugs",,Treatment Drugs,Treatment Drugs,Question,Coded,,
+"82e6c48e-22c7-4043-b3cf-429ca924ed58 ","Retinopathy;
+Peripheral Neuropathy;
+Nephropathy;
+Stroke;
+Ischemic heart disease;
+Heart failure;
+Peripheral vascular disease;
+Diabetic foot;
+Erectile dysfunction;
+Gastropathy;
+Cataracts;
+Dental complication;
+Dyslipidemia;
+Obesity, NOS;
+HIV disease;
+TB",,Diagnosis Complications,Complications/Co-morbidities,Question,Coded,,
+106314BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB,,,National Health Insurance Fund Member,NHIF,Question,Boolean,,
+14c709a6-2207-41fe-853a-056dce21bde7,"Transferred Out;
+Lost to Follow-up;
+Deceased",,Patient status,,Question,Coded,,
+b5585775-9fca-4346-b082-19995cdcab88,,Diagnosis Type ; Year Of Diagnosis ; Diagnosis Complications ;Treatment Drugs ;  Specify Other Drugs ; National Health Insurance Fund Member; Patient status ; 	COMMENTS,MOH 270 Permanent Register,,Misc,N/A,,

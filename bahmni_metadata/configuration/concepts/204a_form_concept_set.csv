@@ -1,0 +1,23 @@
+Uuid,Answers,Members,Fully specified name:en,Short name:en,Data class,Data type,_version:1,_order:4
+07556288-f107-4b56-a127-4c66077445d4,"Referred from CU ; 
+Referred from other Health facility ; 
+Referred from within ; 
+Referred from N/A",,Type of facility referred from,Referred From,Question,Coded,,
+107348BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB,"Unable to drink or breastfeed;
+Vomits everything;Seizures;
+Lethargic/ Unconscious;
+Is convulsing now",,"Danger signs, baby",Danger Signs,Question,Coded,,
+fba6c49a-87fd-483a-a937-b873e189586c,"Presenting with symptoms but NOT tested ; 
+RDT Tested (-ve) ;
+RDT Tested (+ve)  ; 
+Microscopy Tested (-ve) ;
+Microscopy Tested (+ve )",,Suspected Malaria Symptoms,Suspected Malaria cases(all clients presenting with symptoms of Malaria),Question,Coded,,
+f8f8616f-d0e9-4d39-93e1-36451bc71e47,"TB,Presumed ; 
+Not done",,Screened for tuberculosis,TB Screening,Question,Coded,,
+5060b8e0-c6c7-4e36-bc3e-67eb87db940c,"Nutrition Assessment ; 
+Nutrition Education ; 
+Nutrition Supplements",,Nutrition Interventions,,Question,Coded,,
+134833BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB,"Reffered to CU ;
+Other health facility ; 
+Referred within the facility ",,Type of facility referred to,"Referred to ",Question,Coded,,
+f79be001-a025-4b2c-b94c-f8cbc9a8f3fb,,"OPD Visit Date ; Type of facility referred from ;Danger signs, baby ; Chief Complaint Duration ; Suspected Malaria Symptoms ; Immunization status ;Visual Acuity (RE/LE); Screened for tuberculosis ; Nutrition Interventions ; Type of facility referred to ; COMMENTS",Form 204,,Misc,N/A,,

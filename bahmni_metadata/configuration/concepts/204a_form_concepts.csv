@@ -1,0 +1,51 @@
+Uuid,Void/Retire,Fully specified name:en,Short name:en,Description:en,...,Normal low,Normal high,Allow decimals,Display precision,_version:1,_order:3,Data class,Data type,Answers
+173d9bbd-bd20-403a-bcb9-641bbdba67a9,,OPD Visit Date,Visit Date,,,,,,,,,Question,Date,
+"c3876560-5ad8-46ae-ad8b-403d053157c9 ",,Referred from other Health facility,From other facility,,,,,,,,,Misc,N/A,
+35249759-a47b-42ae-abda-31e1dd6be7b5,,Referred from CU,CU,,,,,,,,,Misc,N/A,
+4bef5b89-766a-430c-9379-e252d9023cae,,Referred from within,,,,,,,,,,Misc,N/A,
+bc8bb582-8fbc-4229-86c3-05a0f84a4c78,,Referred from N/A,N/A,,,,,,,,,Misc,N/A,
+07556288-f107-4b56-a127-4c66077445d4,,Type of facility referred from,"Referred From ",,,,,,,,,Question,Coded,"Referred from CU ; 
+Referred from other Health facility ; 
+Referred from within ; 
+Referred from N/A"
+d16436a5-38b7-4151-8f38-61cb366ccadc,,Unable to drink or breastfeed,,,,,,,,,,Misc,N/A,
+8b4fa3a1-55d9-4524-9962-157f7bfdedbd,,Vomits everything,,,,,,,,,,Misc,N/A,
+b34f4e97-59f0-4435-a85f-d13496223165,,Seizures,Had convulsions in this illness,,,,,,,,,Misc,N/A,
+dcd7d885-541b-426a-b332-b70c3b0d00b5,,Lethargic/ Unconscious,Is lethargic or unconscious,,,,,,,,,Finding,N/A,
+140529BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB,,Is convulsing now,Currently convulsing,,,,,,,,,Finding,N/A,
+107348BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB,,"Danger signs, baby",Danger Signs,,,,,,,,,Question,Coded,"Unable to drink or breastfeed;
+Vomits everything;Seizures;
+Lethargic/ Unconscious;
+Is convulsing now"
+c3975851-3f10-11e4-adec-0800271c1b75,,Chief Complaint Duration,Duration of current illness (in days),,,,,,,,,Duration,Numeric,
+2f64bd9c-90e9-4ca6-9d5d-baca8ce00475,,Presenting with symptoms but NOT tested,,,,,,,,,,Misc,N/A,
+10e01f0f-c259-44bb-b19a-c94deee6a641,,"RDT Tested (-ve) ",,,,,,,,,,Finding,N/A,
+70531fd5-e170-45b9-8db0-f3e75d43689f,,"RDT Tested (+ve) ",,,,,,,,,,Finding,N/A,
+d3645a21-13bc-40ef-8e0f-dd0b32a2a19c,,"Microscopy Tested (-ve) ",,,,,,,,,,Finding,N/A,
+2ff41fa6-eb97-4379-8bb0-122cf79a671e,,Microscopy Tested (+ve ),,,,,,,,,,Finding,N/A,
+fba6c49a-87fd-483a-a937-b873e189586c,,Suspected Malaria Symptoms,Suspected Malaria cases(all clients presenting with symptoms of Malaria),,,,,,,,,Question,Coded,"Presenting with symptoms but NOT tested ; 
+RDT Tested (-ve) ;
+RDT Tested (+ve)  ; 
+Microscopy Tested (-ve) ;
+Microscopy Tested (+ve )"
+140501BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB,,Immunization status,Immunization status up to date (Y/N),,,,,,,,,Question,Boolean,
+dc839f64-3334-4607-adb6-5518fa98ce95,,"TB,Presumed",Presumed,,,,,,,,,Misc,N/A,
+e999e1d5-b122-4fb7-9017-c6e6394f18e4,,Not done,Not Done,,,,,,,,,Misc,N/A,
+f8f8616f-d0e9-4d39-93e1-36451bc71e47,,Screened for tuberculosis,TB Screening,,,,,,,,,Question,Coded,"TB,Presumed ; 
+Not done"
+962e52c8-06a7-4264-8769-f41d4405d678,,Visual Acuity (RE/LE),,,,,,,,,,Question,Text,
+fb291468-b698-4686-9551-5d612af74d64,,Nutrition Assessment,,,,,,,,,,Misc,N/A,
+23f4bd9e-3b8f-4144-8ac7-333a16266034,,Nutrition Education,,,,,,,,,,Misc,N/A,
+b0f464fa-ee1f-437b-a027-7d10df71d4a2,,Nutrition Supplements,,,,,,,,,,Misc,N/A,
+5060b8e0-c6c7-4e36-bc3e-67eb87db940c,,Nutriotion Interventions,,,,,,,,,,Question,Coded,"Nutrition Assessment ; 
+Nutrition Education ; 
+Nutrition Supplements"
+3c9d289f-eef8-4830-a72a-8efb07d2e785,,Reffered to CU,CU,,,,,,,,,Misc,N/A,
+140425BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB,,Other health facility,to other H/F,,,,,,,,,Misc,N/A,
+962e52c8-06a7-4264-8769-f41d4405d497,,Referred within the facility,within the facility,,,,,,,,,Misc,N/A,
+134833BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB,,Type of facility referred to,"Referred to ",,,,,,,,,Question,Coded,"Reffered to CU ;
+Other health facility ; 
+Referred within the facility "
+c3659bf9-3f10-11e4-adec-0800271c1b75,,COMMENTS,Remarks/Outcome,,,,,,,,,Misc,Text,
+f79be001-a025-4b2c-b94c-f8cbc9a8f3fb,,Form 204,,,,,,,,,,Misc,N/A,
+f79be001-a025-4b2c-b94c-f8cbc9a8f3fa,yes,Form 204a,"","","","","","","","","",Misc,N/A,""

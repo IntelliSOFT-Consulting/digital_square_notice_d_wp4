@@ -1,0 +1,28 @@
+Uuid,Answers,Members,Fully specified name:en,Short name:en,Data class,Data type,_version:1,_order:2
+2080BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB,"Walking ; 
+Stretcher ;
+Wheelchair ; 
+Carried",,MODE OF TRANSPORT OF ARRIVAL AT HOSPITAL,Mode of Arrival,Question,Coded,,
+107008BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB,"Resuscitation ;
+Emergent ; 
+Urgent ; 
+Less Urgent ; 
+Non-Emergent",,Triage level,"",Question,Coded,"",""
+1189BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB,,"Blood pressure (mmHg) ; 
+Pulse Rate ; 
+Respiratory rate ;
+SPO2 ; 
+AVPU ;
+RBS ;
+Temperature ; 
+Pain Score (/10)",Vital Signs,"",Misc,N/A,"",""
+5d13ab04-6d9c-44fe-9b8c-496bff8ddfac,,"Allergies ; 
+Medication ; 
+PAST MEDICAL HISTORY ; 
+Date of last menstrual period ; 
+Last Meal ; 
+Events leading to illness/injury",Sample History,"",Misc,N/A,"",""
+152dd20d-92dd-4a5a-95db-ac449562c14e,,"MODE OF TRANSPORT OF ARRIVAL AT HOSPITAL ; 
+Triage level ; 
+Vital Signs ; 
+Sample History ",Triage Form,"",Misc,N/A,"",""

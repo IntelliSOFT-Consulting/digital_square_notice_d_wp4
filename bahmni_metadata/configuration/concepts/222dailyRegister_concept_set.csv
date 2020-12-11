@@ -1,0 +1,35 @@
+Uuid,Answers,Members,Fully specified name:en,Short name:en,Data class,Data type,_version:1,_order:126
+c2046d99-2949-4260-9727-2a2869a191f0,"New;
+Known",,HTN Status,,Question,Coded,,
+cfe699b4-f040-4a9b-826b-72c7ba693e72,,,Diabetes New Diagnosis,Diabetes Newly Diagnosed?,Question,Boolean,,
+b7799265-79a1-493e-b1b5-b203d9b2fc5a,"Diabetes mellitus, type 1 ;
+Diabetes mellitus, type 2 ;Gestational Diabetes Mellitus ; 
+Diabetes secondary to other causes ; 
+Hypertension,Diagnosis ;
+Preeclampsia",,"Daily Register, Diagnosis",Diagnosis,Question,Coded,,
+5f7eef07-b4d4-4147-afa2-23c845ba4f8c,"Retinopathy;
+Peripheral Neuropathy;Nephropathy;Stroke;Ischemic heart disease;Heart failure;Peripheral vascular disease;Diabetic foot;Erectile dysfunction;Gastropathy;Cataracts;Dental complication;Dyslipidemia;Obesity, NOS;HIV disease;TB",,"Daily Register,Diagnosis Complications",Complications/Co-morbidities,Question,Coded,,
+33634f0b-160d-48b4-8719-132e650a12f3,"Diet and Physical Activity Drugs ; 
+OGLAs,Treatment Drug ; Insulin ; Anti-hypertensives Drugs ; Herbal, Treatment Drugs; Other Treatment Drugs",,"Daily Register, Treatment Drugs",Treatment Drugs,Question,Coded,,
+95b15dd0-513f-473b-b83e-71c5a233b142,"Foot Clinic,First Visit ;
+Foot Clinic,Revisit",,Foot Clinic,,Question,Coded,,
+be2cab60-20ca-427f-bfb6-a63c7a2b2133,,,"Diabetic foot,Diagnosis",,Question,Boolean,,
+25087b08-35a4-42b0-bc28-35d061025918,"High Risk patient;
+Low Risk Patient",,Foot Risk Assessment,,Question,Coded,,
+c39d39a9-5231-4ba1-ae43-ec6a33790921,"Intact protective sensation ; 
+Pedal pulses present ; 
+No deformity ; 
+No prior foot ulcers ; 
+No amputation",,"Low Risk Patient, Foot Assessment",Low Risk Patient,Question,Coded,,
+aac0de99-bb00-41b4-bd30-ee1773198107,"Loss of protective sensation;
+Absent pedal pulses;
+Deformity of Foot;
+History of foot ulcers;
+Prior amputation",,"High Risk Patient, Foot Assessment",High Risk Patient,Question,Coded,,
+57d7df35-f730-4162-a7ac-8454946af504,"Ulcer Healed ; 
+Surgical debridement ; 
+Lost to Follow-up ; 
+Admitted",,Footcare outcome,,Question,Coded,,
+936e3833-a921-4e4f-a03b-c11f85aacd86,,,"Diabetes, Screend For TB",Screened For TB,Question,Boolean,,
+fd70d1b8-bb4a-4b02-aab6-53b4c98ffbb0,Positive ; Negative,,"Diabetes, TB Status after Screening",TB Status After Screening,Question,Coded,,
+3130a931-85ef-4575-a90c-bd9c83c9c67e,,"HTN Status ; Diabetes New Diagnosis ; RBS ; 	FBS; CURRENT HbA1c(%) ; Daily Register, Diagnosis ;Daily Register,Diagnosis Complications ;  Daily Register, Treatment Drugs ;  Specify Other Drugs ; Foot Clinic ; Diabetic foot,Diagnosis ; Foot Risk Assessment ; Low Risk Patient, Foot Assessment ; High Risk Patient, Foot Assessment ; Footcare outcome; Diabetes, Screend For TB ; Diabetes, TB Status after Screening ; COMMENTS",MOH 222 Daily Register,MOH 222 Daily Register,Misc,N/A,,

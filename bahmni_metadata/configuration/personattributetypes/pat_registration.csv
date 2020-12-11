@@ -1,0 +1,6 @@
+Uuid,Void/Retire,Name,Description,Format,Foreign uuid,Searchable,Edit privilege,_order:1000,_version:2
+82325788-3f10-11e4-adec-0800271c1b75,TRUE,givenNameLocal,,java.lang.String,,,,,
+8233a58a-3f10-11e4-adec-0800271c1b75,TRUE,familyNameLocal,,java.lang.String,,,,,
+8234e7b0-3f10-11e4-adec-0800271c1b75,TRUE,middleNameLocal,,java.lang.String,,,,,
+3dfdc176-17fd-42b1-b5be-c7e25b78b602,TRUE,landHolding,,,,,,,
+fb3c00b1-81c8-40fe-89e8-6b3344688a13,TRUE,debt,,,,,,,

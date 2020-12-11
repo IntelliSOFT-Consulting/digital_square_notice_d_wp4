@@ -1,0 +1,28 @@
+Uuid,Void/Retire,Fully specified name:en,Short name:en,Same as mappings,Description:en,...,_version:1,_order:123,Data class,Data type,Answers
+ea7388e7-109a-4e49-8953-658886248bc2,,Diet and Physical Activity Drugs,"Diet and Physical Activity ",,,,,,Misc,N/A,
+cc99680a-f959-4e2d-a657-749a87295066,,"OGLAs,Treatment Drug",OGLAs,,,,,,Misc,N/A,
+aee5f376-e00c-46f3-83ef-3759e54f85a1,,Insulin,,,,,,,Drug,N/A,
+baf06990-d75c-4096-a338-cac77b480dae,,Anti-hypertensives Drugs,Anti-hypertensives,,,,,,Misc,N/A,
+733e262c-d6c8-406e-bef6-e2cd75e9137d,,"Herbal, Treatment Drugs",Herbal,,,,,,Misc,N/A,
+6ad9e760-a3ce-4dd5-9207-a3c8e216a7a2,"",Other Treatment Drugs,Other,"","","","","",Misc,N/A,""
+af75d3ed-4c7d-4bfb-959c-7aba5d61af93,,Treatment Drugs,Treatment Drugs,,,,,,Question,Coded,"Diet and Physical Activity Drugs ; 
+OGLAs,Treatment Drug ; 
+Insulin ; 
+Anti-hypertensives Drugs ; 
+Herbal, Treatment Drugs; Other Treatment Drugs"
+42201BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB,,"Diabetes mellitus, type 1","Diabetes mellitus, type 1",ICD 10 - WHO:N/A,,,,,Diagnosis,N/A,
+42200BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB,,"Diabetes mellitus, type 2","Diabetes mellitus, type 2",ICD 10 - WHO:N/A,,,,,Diagnosis,N/A,
+27a847c6-dc9a-4e68-ae6b-67271a61fd23,,Diagnosis Type,,,,,,,Question,Coded,"Diabetes mellitus, type 1 ;
+Diabetes mellitus, type 2 ;Gestational Diabetes Mellitus ; 
+Diabetes secondary to other causes ; 
+Hypertension,Diagnosis ;
+Preeclampsia"
+8c9ae007-b2d3-4bfc-aac3-d1c5a2379673,,Year Of Diagnosis,,,,,,,Question,Numeric,
+4c094f4b-073e-48ff-884c-50f77f35ac90,,Specify Other Drugs,,,,,,,Question,Text,
+106314BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB,,National Health Insurance Fund Member,NHIF,,,,,,Question,Boolean,
+b949cd75-97cb-4de2-9553-e6d335696f07,,Transferred Out,,,,,,,Misc,N/A,
+7ca4f879-4862-4cd5-84b3-e1ead8ff54ff,,Lost to Follow-up,,,,,,,Misc,N/A,
+686eada7-fdf4-46da-83a2-fe7c470733fb,,Deceased,,,,,,,Misc,N/A,
+14c709a6-2207-41fe-853a-056dce21bde7,,Patient status,,,,,,,Question,Coded,"Transferred Out;
+Lost to Follow-up;
+Deceased"

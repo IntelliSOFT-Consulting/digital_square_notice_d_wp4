@@ -1,0 +1,47 @@
+Uuid,Void/Retire,Fully specified name:en,Short name:en,Description:en,...,Normal low,Normal high,Allow decimals,Display precision,_version:1,_order:125,Data class,Data type,Answers
+131642BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB,,Waist circumference (cm),,,,,,,,,,Finding,Numeric,
+d8450c8b-7953-4d84-8c63-b89569e4a7a1,,Blood pressure (mmHg),,,,,,,,,,"Finding ",Numeric,
+c20d29b8-10ae-4503-acc5-616f9360ddd0,,New,,,,,,,,,,Misc,N/A,
+1b6c9172-43c7-4f30-98b1-25327bc73a8a,,Known,,,,,,,,,,Misc,N/A,
+c2046d99-2949-4260-9727-2a2869a191f0,,HTN Status,,,,,,,,,,Question,Coded,"New;
+Known"
+cfe699b4-f040-4a9b-826b-72c7ba693e72,,Diabetes New Diagnosis,Diabetes Newly Diagnosed?,,,,,,,,,Question,Boolean,
+c9015b7d-aca7-4e88-ae66-391ce96ae967,"",CURRENT HbA1c(%),CURRENT HbA1c(%),"","","","","","","","",Misc,Numeric,""
+e28a55fa-a9ee-45e9-9476-180ec26b341f,,"Foot Clinic,First Visit",First Visit,,,,,,,,,Misc,N/A,
+14406341-8e0b-49bd-8063-a27bbf6ae06a,,"Foot Clinic,Revisit",Revisit,,,,,,,,,Misc,N/A,
+95b15dd0-513f-473b-b83e-71c5a233b142,,Foot Clinic,,,,,,,,,,Question,Coded,"Foot Clinic,First Visit ;
+Foot Clinic,Revisit"
+be2cab60-20ca-427f-bfb6-a63c7a2b2133,,"Diabetic foot,Diagnosis",,,,,,,,,,Question,Boolean,
+c06dce2a-143a-42a6-8228-e3a0b1e59998,,Intact protective sensation,,,,,,,,,,Misc,N/A,
+69dc4363-931e-49c2-83f5-58fe6127199f,,Pedal pulses present,,,,,,,,,,Misc,N/A,
+13509896-5a68-4a8b-bdb7-6cb65a2ab629,,No deformity,,,,,,,,,,Misc,N/A,
+845b1e54-398a-4ca5-8604-0f5b5af6d65b,,No prior foot ulcers,,,,,,,,,,Misc,N/A,
+7bd7648b-55bc-4a32-8a5d-c9286e55c99a,,No amputation,,,,,,,,,,Misc,N/A,
+c39d39a9-5231-4ba1-ae43-ec6a33790921,,"Low Risk Patient, Foot Assessment",Low Risk Patient,,,,,,,,,Question,Coded,"Intact protective sensation ; 
+Pedal pulses present ; 
+No deformity ; 
+No prior foot ulcers ; 
+No amputation"
+6c774eec-e375-4981-93f3-fc165cc55bc0,,Loss of protective sensation,,,,,,,,,,Misc,N/A,
+5e7a3d04-b7d0-4a4a-b1cb-af43a34de043,,Absent pedal pulses,,,,,,,,,,Misc,N/A,
+42401BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB,,Deformity of Foot,Foot Deformity,,,,,,,,,Misc,N/A,
+89641fd7-2465-4943-ad10-e7944b66942a,,History of foot ulcers,,,,,,,,,,Misc,N/A,
+139689BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB,,Amputation,Prior amputation,,,,,,,,,Misc,N/A,
+aac0de99-bb00-41b4-bd30-ee1773198107,,"High Risk Patient, Foot Assessment",High Risk Patient,,,,,,,,,Question,Coded,"Loss of protective sensation;
+Absent pedal pulses;
+Deformity of Foot;
+History of foot ulcers;
+Prior amputation"
+c311b252-9c36-4c62-9f2a-ac196088d590,,High Risk patient,,,,,,,,,,Misc,N/A,
+af896251-8a7a-45fc-8633-359b01413d8c,,Low Risk Patient,,,,,,,,,,Misc,N/A,
+25087b08-35a4-42b0-bc28-35d061025918,,Foot Risk Assessment,,,,,,,,,,Question,Coded,"High Risk patient;
+Low Risk Patient"
+f7965d17-cee7-40c6-a86f-40bb054107e7,,Ulcer Healed,,,,,,,,,,Misc,N/A,
+a0620116-7abc-484e-849d-eb993c013e05,,Surgical debridement,,,,,,,,,,Misc,N/A,
+f1e3dad1-bb4c-42fa-a365-fd66aa3c7be6,,Admitted,,,,,,,,,,Misc,N/A,
+57d7df35-f730-4162-a7ac-8454946af504,,Footcare outcome,,,,,,,,,,Question,Coded,"Ulcer Healed ; 
+Surgical debridement ; 
+Lost to Follow-up ; 
+Admitted"
+936e3833-a921-4e4f-a03b-c11f85aacd86,,"Diabetes, Screend For TB",Screened For TB,,,,,,,,,Question,Boolean,
+fd70d1b8-bb4a-4b02-aab6-53b4c98ffbb0,,"Diabetes, TB Status after Screening",TB Status After Screening,,,,,,,,,Question,Coded,Positive; Negative

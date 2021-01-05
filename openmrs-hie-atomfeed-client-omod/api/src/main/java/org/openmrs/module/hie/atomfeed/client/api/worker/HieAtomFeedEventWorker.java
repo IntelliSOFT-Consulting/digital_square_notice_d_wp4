@@ -8,6 +8,7 @@ import org.apache.http.StatusLine;
 import org.apache.http.auth.AuthenticationException;
 import org.bahmni.webclients.HttpClient;
 import org.bahmni.webclients.HttpHeaders;
+import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.ResourceType;
 import org.ict4h.atomfeed.client.domain.Event;
@@ -26,6 +27,8 @@ import org.openmrs.module.hie.atomfeed.client.api.HieAtomFeedProperties;
 import org.openmrs.module.hie.atomfeed.client.api.client.FhirClient;
 import org.openmrs.module.hie.atomfeed.client.api.util.FhirServerStoreUtil;
 import org.openmrs.module.hie.atomfeed.client.api.util.PatientUrlUtil;
+
+import ca.uhn.fhir.context.FhirContext;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -90,7 +93,7 @@ public class HieAtomFeedEventWorker implements EventWorker {
 				return;
 			}
 			org.hl7.fhir.r4.model.Patient hl7Patient = patientTranslator.toFhirResource(patient);
-			String fhirJson = gson.toJson(hl7Patient);
+			String fhirJson = convertResourceToJson(hl7Patient);
 			postFhirResource(fhirJson, ResourceType.Patient);
 			
 		}
@@ -119,7 +122,7 @@ public class HieAtomFeedEventWorker implements EventWorker {
 		}
 		
 		org.hl7.fhir.r4.model.Encounter hl7Encounter = encounterTranslator.toFhirResource(encounter);
-		String fhirJson = gson.toJson(hl7Encounter);
+		String fhirJson = convertResourceToJson(hl7Encounter);
 		log.error(fhirJson);
 		
 		postFhirResource(fhirJson, ResourceType.Encounter);
@@ -130,7 +133,7 @@ public class HieAtomFeedEventWorker implements EventWorker {
 			if (obs.getConcept().getUuid().equals(properties.getGetDefaultObsConcept())) {
 				
 				Observation hl7Observation = observationTranslator.toFhirResource(obs);
-				String obsFhirJson = gson.toJson(hl7Observation);
+				String obsFhirJson = convertResourceToJson(hl7Observation);
 				log.error(obsFhirJson);
 				observationHashSet.add(obsFhirJson);
 				
@@ -140,6 +143,10 @@ public class HieAtomFeedEventWorker implements EventWorker {
 		for (String obsFhirResource : observationHashSet) {
 			postFhirResource(obsFhirResource, ResourceType.Observation);
 		}
+	}
+
+	private String convertResourceToJson(IBaseResource hl7Encounter) {
+		return FhirContext.forR4().newJsonParser().encodeResourceToString(hl7Encounter);
 	}
 	
 	private void postFhirResource(String fhirResource, ResourceType resourceType) {

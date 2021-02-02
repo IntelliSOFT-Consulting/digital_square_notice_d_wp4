@@ -1,0 +1,67 @@
+	{
+	   "resourceType": "Measure",
+	   "id": "measure-TX_PVLS",
+	   "description": "TX_PVLS indicator FHIR Measure Resource",
+	   "identifier": [
+		   {
+			   "use": "official",
+			   "value": "TX_PVLS"
+		   }
+	   ],
+	   "version": "0.0.1",
+	   "title": "TX_PVLS indicator FHIR Measure Resource",
+	   "status": "draft",
+	   "experimental": true,
+	   "group": [
+		   {
+			   "id": "population",
+			   "population": [
+				   {
+					   "code": {
+						   "coding": [
+							   {
+								   "code": "initial-population",
+								   "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+								   "display": "Initial Population"
+							   }
+						   ]
+					   },
+					   "criteria": {
+						   "language": "text/cql.identifier",
+						   "expression": "Initial Population"
+					   }
+				   },
+				   {
+					   "code": {
+						   "coding": [
+							   {
+								   "code": "numerator",
+								   "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+								   "display": "Numerator"
+							   }
+						   ]
+					   },
+					   "criteria": {
+						   "language": "text/cql.identifier",
+						   "expression": "Numerator"
+					   }
+				   },
+				   {
+					   "code": {
+						   "coding": [
+							   {
+								   "code": "denominator",
+								   "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+								   "display": "Denominator"
+							   }
+						   ]
+					   },
+					   "criteria": {
+						   "language": "text/cql.identifier",
+						   "expression": "Denominator"
+					   }
+				   }
+			   ]
+		   }
+	   ]
+	}

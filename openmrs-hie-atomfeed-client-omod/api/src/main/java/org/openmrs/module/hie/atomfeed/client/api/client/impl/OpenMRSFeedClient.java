@@ -54,6 +54,7 @@ public abstract class OpenMRSFeedClient {
 	}
 	
 	public org.ict4h.atomfeed.client.service.FeedClient getAtomFeedClient() {
+		logger.debug("Getting atom feed client");
 		if (atomFeedClient == null) {
 			createAtomFeedClient();
 		}

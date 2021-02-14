@@ -69,6 +69,7 @@ public class HieAtomFeedEventWorker implements EventWorker {
 	
 	@Override
 	public void process(Event event) {
+		log.debug("Processing has began");
 		String content = event.getContent();
 		if (content == null || "".equals(content)) {
 			log.error("No content in event: " + event);
@@ -83,6 +84,7 @@ public class HieAtomFeedEventWorker implements EventWorker {
 	}
 	
 	private void processPatientEvent(Event event) {
+		log.debug("Procesing patient event xxxxxxxxxxx");
 		String patientUrl = properties.getOpenMrsUri() + event.getContent();
 		String patientUuid = PatientUrlUtil.getFulUuidVarFromUrl(event.getContent());
 		
@@ -144,12 +146,13 @@ public class HieAtomFeedEventWorker implements EventWorker {
 			postFhirResource(obsFhirResource, ResourceType.Observation);
 		}
 	}
-
+	
 	private String convertResourceToJson(IBaseResource hl7Encounter) {
 		return FhirContext.forR4().newJsonParser().encodeResourceToString(hl7Encounter);
 	}
 	
 	private void postFhirResource(String fhirResource, ResourceType resourceType) {
+		log.debug("Posting FHIR resource");
         try {
             StatusLine statusLine = FhirServerStoreUtil.postFhirResource(properties, fhirResource, resourceType);
             if (statusLine.getStatusCode() != 200) {

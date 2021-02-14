@@ -16,6 +16,8 @@ public class AtomFeedClientTask extends AbstractTask {
 	}
 	
 	private void runTask() {
+		log.debug("Running AtomFeed Task");
+		System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxx  RUnning Atomfeed task xxxxxxxxxxxxxxxxxxxxxxxxxx");
 		OpenMrsPatientFeedClient feedClient = Context.getService(OpenMrsPatientFeedClient.class);
 		feedClient.processFeed();
 	}

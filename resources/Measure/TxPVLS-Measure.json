@@ -1,0 +1,77 @@
+{
+    "resourceType": "Measure",
+    "id": "TxPVLS",
+    "description": "Tx-PVLS indicator FHIR Measure Resource",
+    "identifier": [
+        {
+            "use": "official",
+            "value": "TxPVLS"
+        }
+    ],
+    "version": "0.0.1",
+    "title": "Tx_PVLS indicator FHIR Measure Resource",
+    "status": "draft",
+    "library": ["Library/TxPVLS"],
+    "experimental": true,
+    "scoring": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/measure-scoring",
+            "code": "proportion",
+            "display": "Proportion"
+          }
+        ]
+      },
+    "group": [
+        {
+            "id": "population",
+            "population": [
+                {
+                    "code": {
+                        "coding": [
+                            {
+                                "code": "initial-population",
+                                "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+                                "display": "Initial Population"
+                            }
+                        ]
+                    },
+                    "criteria": {
+                        "language": "text/cql.identifier",
+                        "expression": "Initial Population"
+                    }
+                },
+                {
+                    "code": {
+                        "coding": [
+                            {
+                                "code": "numerator",
+                                "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+                                "display": "Numerator"
+                            }
+                        ]
+                    },
+                    "criteria": {
+                        "language": "text/cql.identifier",
+                        "expression": "Numerator"
+                    }
+                },
+                {
+                    "code": {
+                        "coding": [
+                            {
+                                "code": "denominator",
+                                "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+                                "display": "Denominator"
+                            }
+                        ]
+                    },
+                    "criteria": {
+                        "language": "text/cql.identifier",
+                        "expression": "Denominator"
+                    }
+                }
+            ]
+        }
+    ]
+}

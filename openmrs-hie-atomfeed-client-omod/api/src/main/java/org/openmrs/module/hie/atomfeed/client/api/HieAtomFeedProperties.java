@@ -31,7 +31,7 @@ public class HieAtomFeedProperties extends AtomFeedProperties {
 	
 	private String fhirServerPatientEndpoint = "http://45.33.84.72:5001/fhir/patient";
 	
-	private String fhirServerObservationEndpoint = "http://45.33.84.72:5001/fhir/oobservatioon";
+	private String fhirServerObservationEndpoint = "http://45.33.84.72:5001/fhir/observation";
 	
 	private String fhirServerEncounterEndpoint = "http://45.33.84.72:5001/fhir/encounter";
 	

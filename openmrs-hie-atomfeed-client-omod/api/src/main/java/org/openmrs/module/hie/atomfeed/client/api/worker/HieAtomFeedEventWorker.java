@@ -8,15 +8,22 @@ import org.apache.http.StatusLine;
 import org.apache.http.auth.AuthenticationException;
 import org.bahmni.webclients.HttpClient;
 import org.bahmni.webclients.HttpHeaders;
+import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.instance.model.api.IBaseResource;
+import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.HumanName;
+import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.ResourceType;
+import org.hl7.fhir.r4.model.HumanName.NameUse;
 import org.ict4h.atomfeed.client.domain.Event;
 import org.ict4h.atomfeed.client.service.EventWorker;
 import org.openmrs.Encounter;
 import org.openmrs.Obs;
 import org.openmrs.Order;
 import org.openmrs.Patient;
+import org.openmrs.PatientIdentifier;
+import org.openmrs.PersonName;
 import org.openmrs.api.EncounterService;
 import org.openmrs.api.PatientService;
 import org.openmrs.api.context.Context;
@@ -31,7 +38,9 @@ import org.openmrs.module.hie.atomfeed.client.api.util.PatientUrlUtil;
 import ca.uhn.fhir.context.FhirContext;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class HieAtomFeedEventWorker implements EventWorker {
@@ -70,6 +79,7 @@ public class HieAtomFeedEventWorker implements EventWorker {
 	@Override
 	public void process(Event event) {
 		log.debug("Processing has began");
+		log.info(String.format("The current event is : %s", event.getTitle()));
 		String content = event.getContent();
 		if (content == null || "".equals(content)) {
 			log.error("No content in event: " + event);
@@ -94,7 +104,37 @@ public class HieAtomFeedEventWorker implements EventWorker {
 				log.error("HieAtom feed error : Could not get patient with uuid " + patientUuid);
 				return;
 			}
+			
 			org.hl7.fhir.r4.model.Patient hl7Patient = patientTranslator.toFhirResource(patient);
+			Set<PersonName> patientNames = patient.getNames();
+			List<HumanName> humanNames = new ArrayList<HumanName>();
+			
+			for (PersonName personName : patientNames) {
+				HumanName humanName = new HumanName();
+				humanName.setFamily(personName.getFamilyName());
+				humanName.addGiven(personName.getGivenName());
+				if (personName.getMiddleName() != null) {
+					humanName.addGiven(personName.getMiddleName());
+				}
+				
+				if (personName.getPreferred() || patientNames.size() == 0) {
+					humanName.setUse(NameUse.OFFICIAL);
+				}
+				
+				humanNames.add(humanName);
+			}
+			
+			Identifier systemIdentifier = new Identifier();
+			CodeableConcept codingValue = new CodeableConcept();
+			codingValue.addCoding(new Coding("http://terminology.hl7.org/CodeSystem/v2-0203", "PI",
+			        "Patient External Identifier"));
+			systemIdentifier.setType(codingValue);
+			systemIdentifier.setSystem("LOCAL");
+			//TODO: Concatenate the System  URL with the patient uuid: May be set it as a global config? 
+			systemIdentifier.setValue(patient.getUuid());
+			
+			hl7Patient.getIdentifier().add(systemIdentifier);
+			hl7Patient.setName(humanNames);
 			String fhirJson = convertResourceToJson(hl7Patient);
 			postFhirResource(fhirJson, ResourceType.Patient);
 			

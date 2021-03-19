@@ -1,6 +1,6 @@
 import Selector from './components/Selector'
 import Results from './components/Results'
-import { HashRouter as Router, Switch, Route } from 'react-router-dom'
+import { HashRouter as Router, Route } from 'react-router-dom'
 
 
 function App() {
@@ -10,12 +10,8 @@ function App() {
       <div className="bx--row">
         <div className="bx--col-lg-4 bx--col-md-4 bx--col-sm-4">
           <Router>
-            <Switch>
-              <Route exact path="/">
-                <Selector />
-              </Route>
+              <Route exact path="/" component={Selector} />
               <Route path="/results/:id" children={<Results/>} />
-            </Switch>
           </Router>
         </div>
       </div>

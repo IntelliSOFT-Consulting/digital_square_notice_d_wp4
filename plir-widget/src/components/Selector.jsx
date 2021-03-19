@@ -2,18 +2,21 @@ import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Dropdown, Button, DatePicker, DatePickerInput } from 'carbon-components-react'
 
-let url = 'https://proxy-orcin.vercel.app/?url=http://45.79.249.220:8888/fhir/Measure?_format=json'
+let url = 'https://proxy-orcin.vercel.app/?url=http://45.33.84.72:8095/fhir/Measure?_format=json'
 
 export default function Selector() {
 
     let [selected, setSelected] = useState('')
+    let [reportingDate, setReportingDate] = useState('')
     let [indicators, setIndicators] = useState([])
     
     let history = useHistory()
 
     let generateResults = () => {
-        history.push(`/results/${selected}`)
+        if (!reportingDate){return}
+        history.push(`/results/${selected}?reportingDate=${reportingDate}`)
     }
+
 
     useEffect(() => {
         async function getData() {
@@ -43,9 +46,12 @@ export default function Selector() {
             <br />
             {
                 selected &&
-                <DatePicker className="bx--col-lg-4 bx--col-sm-4" datePickerType="single">
+                <DatePicker dateFormat="Y-m-d" datePickerType="single" value={reportingDate} onChange={e => setReportingDate(
+                    document.getElementById('reportingDate').value
+                )} >
                     <DatePickerInput id="reportingDate"
-                        placeholder="mm/dd/yyyy"
+                        required
+                        placeholder="yyyy-mm-dd"
                         labelText="Reporting Date"
                     />
                 </DatePicker>
@@ -54,7 +60,7 @@ export default function Selector() {
             {   selected &&
                 <>
                     <br />
-                    <Button kind="secondary" type="button" onClick={e => { console.log(e); generateResults() }}>
+                    <Button  className="" kind="secondary" type="button" onClick={e => { console.log(e); generateResults() }}>
                         Next
                             </Button>
                 </>

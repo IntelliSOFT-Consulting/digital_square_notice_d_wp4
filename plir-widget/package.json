@@ -1,5 +1,5 @@
 {
-  "name": "PLIR Widget",
+  "name": "plir-widget",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -32,6 +32,7 @@
   },
   "browserslist": {
     "production": [
+      "last 1 chrome version",
       ">0.2%",
       "not dead",
       "not op_mini all"

@@ -8,16 +8,16 @@ export default function ResultsCard({results}) {
         <>
             <Tile>
                 <h4><u>{results.measure}</u></h4>
-            </Tile>
-            <br/>
-            <Tile>
+                <br/>
+
+            
                 {results.group[0].population.map((population) => {
-                   return <p>{population.code.coding[0].display}: {population.count}</p>
+                   return <p key={String(population.code.coding[0].code)}>{population.code.coding[0].display}: {population.count}</p>
                 })}
             
                 <hr/>
                 <h5>
-					Measure Score: {(results.group[0].measureScore.value).toFixed(2)}
+					Measure Score: {results.group[0].measureScore ? (results.group[0].measureScore.value).toFixed(2):  "0" }
 				</h5>
             </Tile>
         </>

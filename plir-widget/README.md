@@ -1,4 +1,4 @@
-# Tx_PVLS
+#  PLIR JS widget for the Tx_PVLS Indicator
 
 
 ## How to run in development mode

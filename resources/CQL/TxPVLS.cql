@@ -8,7 +8,7 @@ codesystem "SNOMEDCT:2017-09": 'http://snomed.info/sct' version 'http://snomed.i
 
 code "Human immunodeficiency virus viral load (procedure)": '315124004' from "SNOMEDCT:2017-09" display 'Human immunodeficiency virus viral load (procedure)'
 
-parameter MeasurementPeriod Interval<DateTime>
+parameter "Measurement Period" Interval<DateTime>
     default Interval[@2020-01-01T00:00:00.0, @2020-12-31T00:00:00.0)
 
 /*

@@ -34,5 +34,19 @@ You can now find the generated files in the `bundle/` folder
 
 
 ```
-<div class="PLIR-Widget"></div>
+
+    <link rel="stylesheet" href="bundle/index.css">
+</head>
+    <body>
+        <!-- SOME CONTENT -->
+
+        <div id="tx-pvls-widget"></div>
+
+        <!-- SOME MORE CONTENT -->
+
+        
+    
+    <script src="bundle/index.js"></script>
+    </body>
+</html>
 ```

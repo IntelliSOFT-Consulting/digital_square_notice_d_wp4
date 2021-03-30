@@ -18,6 +18,10 @@ export default function Results(){
     _start.setFullYear(_start.getFullYear() - 1)
     let start = _start.getFullYear() + "-" + String(_start.getMonth() + 1).padStart(2, 0) + "-" + String(_start.getDate()).padStart(2, 0)
     
+    let reportingPeriod = {
+        start: start,
+        end: reportingDate
+    } 
 
     console.log(reportingDate)
     console.log(start)
@@ -61,7 +65,7 @@ export default function Results(){
     return (
         <>
         {
-            (results)  ? <><ResultsCard results={results} /></>:
+            (results)  ? <><ResultsCard results={results} reportingPeriod={reportingPeriod}/></>:
             // (results && !results.group[0].measureScore )?
             // <Error error="Measure Score is 0 or null"/>
             // :
@@ -69,7 +73,7 @@ export default function Results(){
         }
         <br/>
         <Button kind="tertiary" onClick={e => {history.push('/#')}} style={{float:'left'}} >Go back</Button>
-       
+        
         {
             (results) ?  <Button kind='secondary' style={{float:'right'}} onClick={e => {exportJSON()}} >Export JSON</Button> : ""
         }

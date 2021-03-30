@@ -61,7 +61,7 @@ export default function Selector() {
                 <>
                     <br />
                     <Button  className="" kind="secondary" type="button" onClick={e => { console.log(e); generateResults() }}>
-                        Next
+                        Generate Report
                             </Button>
                 </>
             }

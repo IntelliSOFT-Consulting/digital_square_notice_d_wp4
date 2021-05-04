@@ -4,7 +4,7 @@ import { backendDependencies } from './openmrs-backend-dependencies';
 const importTranslation = require.context('../translations', false, /.json$/, 'lazy');
 
 function setupOpenMRS() {
-  const moduleName = '@openmrs/esm-testresults-app';
+  const moduleName = '@openmrs/esm-txpvls';
 
   const options = {
     featureName: 'testresults',
@@ -13,7 +13,7 @@ function setupOpenMRS() {
 
   return {
     lifecycle: getAsyncLifecycle(() => import('./txpvls'), options),
-    activate: 'txpvls',
+    activate: 'home',
     extensions: [
       {
         id: 'playground-nav-link',

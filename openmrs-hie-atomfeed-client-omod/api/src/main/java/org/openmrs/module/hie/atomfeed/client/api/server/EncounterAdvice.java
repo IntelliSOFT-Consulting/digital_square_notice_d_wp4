@@ -26,6 +26,11 @@ import java.util.UUID;
 
 public class EncounterAdvice extends StaticMethodMatcherPointcutAdvisor implements Advisor {
 	
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = -2091873066835451861L;
+	
 	private Log log = LogFactory.getLog(this.getClass());
 	
 	private AtomFeedSpringTransactionManager atomFeedSpringTransactionManager;
@@ -42,6 +47,7 @@ public class EncounterAdvice extends StaticMethodMatcherPointcutAdvisor implemen
 	
 	@Override
 	public boolean matches(Method method, Class<?> aClass) {
+		log.info(String.format("The current method name captured by the advice is: %s", method.getName()));
 		return method.getName().equals("saveEncounter");
 		
 	}

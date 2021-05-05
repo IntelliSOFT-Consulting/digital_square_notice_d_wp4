@@ -10,9 +10,11 @@ import org.ict4h.atomfeed.client.service.AtomFeedClient;
 import org.ict4h.atomfeed.client.service.EventWorker;
 import org.openmrs.api.EncounterService;
 import org.openmrs.api.PatientService;
-import org.openmrs.module.fhir2.api.translators.ObservationTranslator;
-import org.openmrs.module.fhir2.api.translators.PatientTranslator;
+import org.openmrs.module.fhir2.api.translators.*;
 import org.openmrs.module.fhir2.api.translators.impl.EncounterTranslatorImpl;
+import org.openmrs.module.fhir2.api.translators.impl.PractitionerTranslatorProviderImpl;
+import org.openmrs.module.fhir2.api.translators.impl.ServiceRequestTranslatorImpl;
+import org.openmrs.module.fhir2.api.translators.impl.VisitTranslatorImpl;
 import org.openmrs.module.hie.atomfeed.client.api.HieAtomFeedProperties;
 import org.openmrs.module.hie.atomfeed.client.api.client.FhirClient;
 import org.openmrs.module.hie.atomfeed.client.api.client.OpenMrsPatientFeedClient;
@@ -25,28 +27,44 @@ import org.springframework.transaction.PlatformTransactionManager;
 @Component("openMrsPatientFeedClient")
 public class OpenMrsPatientFeedClientImpl extends OpenMRSFeedClient implements OpenMrsPatientFeedClient {
 	
-	private Log log = LogFactory.getLog(OpenMrsPatientFeedClientImpl.class);
+	private final Log log = LogFactory.getLog(OpenMrsPatientFeedClientImpl.class);
 	
-	private PatientService patientService;
+	private final PatientService patientService;
 	
-	private PatientTranslator patientTranslator;
+	private final PatientTranslator patientTranslator;
 	
-	private EncounterTranslatorImpl encounterTranslator;
+	private final EncounterTranslatorImpl encounterTranslator;
 	
-	private EncounterService encounterService;
+	private final EncounterService encounterService;
 	
-	private ObservationTranslator observationTranslator;
+	private final ObservationTranslator observationTranslator;
+	
+	private final LocationTranslator locationTranslator;
+	
+	private final VisitTranslatorImpl visitTranslator;
+	
+	private final PractitionerTranslatorProviderImpl practitionerTranslator;
+	
+	private ServiceRequestTranslatorImpl serviceRequestTranslator;
 	
 	@Autowired
 	public OpenMrsPatientFeedClientImpl(HieAtomFeedProperties properties, PlatformTransactionManager transactionManager,
 	    PatientService patientService, PatientTranslator patientTranslator, EncounterTranslatorImpl encounterTranslator,
-	    EncounterService encounterService, ObservationTranslator observationTranslator, FhirClient fhirClient) {
+	    EncounterService encounterService, ObservationTranslator observationTranslator,
+	    LocationTranslator locationTranslator, VisitTranslatorImpl visitTranslator,
+	    PractitionerTranslatorProviderImpl practitionerTranslator, ServiceRequestTranslatorImpl serviceRequestTranslator,
+	    FhirClient fhirClient) {
 		super(properties, transactionManager);
 		this.patientService = patientService;
 		this.patientTranslator = patientTranslator;
 		this.encounterTranslator = encounterTranslator;
 		this.encounterService = encounterService;
 		this.observationTranslator = observationTranslator;
+		this.locationTranslator = locationTranslator;
+		this.visitTranslator = visitTranslator;
+		this.practitionerTranslator = practitionerTranslator;
+		this.serviceRequestTranslator = serviceRequestTranslator;
+		
 	}
 	
 	@Override
@@ -91,7 +109,8 @@ public class OpenMrsPatientFeedClientImpl extends OpenMRSFeedClient implements O
 	@Override
 	protected EventWorker createWorker(HttpClient authenticatedWebClient, HieAtomFeedProperties properties) {
 		return new HieAtomFeedEventWorker(authenticatedWebClient, properties, patientService, patientTranslator,
-		        encounterTranslator, encounterService, observationTranslator);
+		        encounterTranslator, encounterService, observationTranslator, locationTranslator, visitTranslator,
+		        practitionerTranslator, serviceRequestTranslator);
 	}
 	
 	private boolean isUnauthorised(Exception e) {

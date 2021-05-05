@@ -8,30 +8,20 @@ import org.apache.http.StatusLine;
 import org.apache.http.auth.AuthenticationException;
 import org.bahmni.webclients.HttpClient;
 import org.bahmni.webclients.HttpHeaders;
-import org.hl7.fhir.r4.model.CodeableConcept;
+import org.hl7.fhir.r4.model.*;
 import org.hl7.fhir.instance.model.api.IBaseResource;
-import org.hl7.fhir.r4.model.Coding;
-import org.hl7.fhir.r4.model.HumanName;
-import org.hl7.fhir.r4.model.Identifier;
-import org.hl7.fhir.r4.model.Observation;
-import org.hl7.fhir.r4.model.ResourceType;
 import org.hl7.fhir.r4.model.HumanName.NameUse;
 import org.ict4h.atomfeed.client.domain.Event;
 import org.ict4h.atomfeed.client.service.EventWorker;
+import org.openmrs.*;
 import org.openmrs.Encounter;
-import org.openmrs.Obs;
-import org.openmrs.Order;
+import org.openmrs.Location;
 import org.openmrs.Patient;
-import org.openmrs.PatientIdentifier;
-import org.openmrs.PersonName;
 import org.openmrs.api.EncounterService;
 import org.openmrs.api.PatientService;
-import org.openmrs.api.context.Context;
-import org.openmrs.module.fhir2.api.translators.ObservationTranslator;
-import org.openmrs.module.fhir2.api.translators.PatientTranslator;
-import org.openmrs.module.fhir2.api.translators.impl.EncounterTranslatorImpl;
+import org.openmrs.module.fhir2.api.translators.*;
+import org.openmrs.module.fhir2.api.translators.impl.*;
 import org.openmrs.module.hie.atomfeed.client.api.HieAtomFeedProperties;
-import org.openmrs.module.hie.atomfeed.client.api.client.FhirClient;
 import org.openmrs.module.hie.atomfeed.client.api.util.FhirServerStoreUtil;
 import org.openmrs.module.hie.atomfeed.client.api.util.PatientUrlUtil;
 
@@ -39,7 +29,6 @@ import ca.uhn.fhir.context.FhirContext;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -63,9 +52,19 @@ public class HieAtomFeedEventWorker implements EventWorker {
 	
 	private EncounterService encounterService;
 	
+	private LocationTranslator locationTranslator;
+	
+	private PractitionerTranslator practitionerTranslator;
+	
+	private VisitTranslatorImpl visitTranslator;
+	
+	private ServiceRequestTranslatorImpl serviceRequestTranslator;
+	
 	public HieAtomFeedEventWorker(HttpClient httpClient, HieAtomFeedProperties properties, PatientService patientService,
 	    PatientTranslator patientTranslator, EncounterTranslatorImpl encounterTranslator, EncounterService encounterService,
-	    ObservationTranslator observationTranslator) {
+	    ObservationTranslator observationTranslator, LocationTranslator locationTranslator,
+	    VisitTranslatorImpl visitTranslator, PractitionerTranslatorProviderImpl practitionerTranslator,
+	    ServiceRequestTranslatorImpl serviceRequestTranslator) {
 		this.properties = properties;
 		this.httpClient = httpClient;
 		this.patientService = patientService;
@@ -73,6 +72,10 @@ public class HieAtomFeedEventWorker implements EventWorker {
 		this.encounterTranslator = encounterTranslator;
 		this.encounterService = encounterService;
 		this.observationTranslator = observationTranslator;
+		this.locationTranslator = locationTranslator;
+		this.visitTranslator = visitTranslator;
+		this.practitionerTranslator = practitionerTranslator;
+		this.serviceRequestTranslator = serviceRequestTranslator;
 		this.gson = new Gson();
 	}
 	
@@ -130,13 +133,13 @@ public class HieAtomFeedEventWorker implements EventWorker {
 			        "Patient External Identifier"));
 			systemIdentifier.setType(codingValue);
 			systemIdentifier.setSystem("LOCAL");
-			//TODO: Concatenate the System  URL with the patient uuid: May be set it as a global config? 
+			//TODO: Concatenate the System  URL with the patient uuid: May be set it as a global config?
 			systemIdentifier.setValue(patient.getUuid());
 			
 			hl7Patient.getIdentifier().add(systemIdentifier);
 			hl7Patient.setName(humanNames);
 			String fhirJson = convertResourceToJson(hl7Patient);
-			postFhirResource(fhirJson, ResourceType.Patient);
+			putFhirResource(fhirJson, ResourceType.Patient, patient.getUuid());
 			
 		}
 		catch (JsonParseException e) {
@@ -154,36 +157,73 @@ public class HieAtomFeedEventWorker implements EventWorker {
 		log.error("Encounter uuid " + encounterUuid);
 		Encounter encounter = encounterService.getEncounterByUuid(encounterUuid);
 		if (encounter == null) {
-			log.error("Hie Atom feed error : Can not get encounter with uuid - " + encounterUuid);
+			log.warn("Hie Atom feed error : Can not get encounter with uuid - " + encounterUuid);
 			return;
 		}
 		log.error("Encounter type " + encounter.getEncounterType().getName());
 		if (!properties.getEncounterTypes().contains(encounter.getEncounterType().getName())) {
-			log.error("Hie Atom feed : Skipping encounter tyoe- " + encounter.getEncounterType().getName());
+			log.warn("Hie Atom feed : Skipping encounter type- " + encounter.getEncounterType().getName());
 			return;
 		}
+		//Location
+		Location encounterLocation = encounter.getLocation();
+		if (encounterLocation != null) {
+			// Dirty hack to prevent creation of a reference hierarchy
+			// TODO: Replace this code block with a recursive method
+			encounterLocation.setParentLocation(null);
+			org.hl7.fhir.r4.model.Location hl7Location = locationTranslator.toFhirResource(encounterLocation);
+			String locationFhirJson = convertResourceToJson(hl7Location);
+			log.debug(locationFhirJson);
+			putFhirResource(locationFhirJson, ResourceType.Location, encounterLocation.getUuid());
+		}
 		
+		//Encounter participants
+		Set<EncounterProvider> encounterProviders = encounter.getEncounterProviders();
+		for (EncounterProvider encounterProvider : encounterProviders) {
+			org.hl7.fhir.r4.model.Practitioner encounterParticipant = practitionerTranslator
+			        .toFhirResource(encounterProvider.getProvider());
+			if (encounterProvider.getProvider().getPerson().getGender() == null) {
+				encounterParticipant.setGender(null);
+			}
+			String practitionerFhirJson = convertResourceToJson(encounterParticipant);
+			log.debug(practitionerFhirJson);
+			putFhirResource(practitionerFhirJson, ResourceType.Practitioner, encounterProvider.getProvider().getUuid());
+		}
+		
+		//Visit
+		Visit visit = encounter.getVisit();
+		org.hl7.fhir.r4.model.Encounter hl7Visit = visitTranslator.toFhirResource(visit);
+		String visitFhirJson = convertResourceToJson(hl7Visit);
+		log.debug(visitFhirJson);
+		putFhirResource(visitFhirJson, ResourceType.Encounter, visit.getUuid());
+		
+		//Encounter
 		org.hl7.fhir.r4.model.Encounter hl7Encounter = encounterTranslator.toFhirResource(encounter);
 		String fhirJson = convertResourceToJson(hl7Encounter);
-		log.error(fhirJson);
+		log.debug(fhirJson);
+		putFhirResource(fhirJson, ResourceType.Encounter, encounterUuid);
 		
-		postFhirResource(fhirJson, ResourceType.Encounter);
-		
+		//Observation
 		Set<Obs> obsHashSet = encounter.getObs();
-		HashSet<String> observationHashSet = new HashSet<String>();
+		log.info("Logging Obs." + obsHashSet.size());
 		for (Obs obs : obsHashSet) {
+			log.info("Concept Id- " + obs.getConcept().getConceptId() + " ConceptName- " + obs.getConcept().getName());
 			if (obs.getConcept().getUuid().equals(properties.getGetDefaultObsConcept())) {
+				
+				// Service request (To fulfill "BasedOn" attribute)
+				TestOrder testOrder = new TestOrder();
+				testOrder.setUuid(obs.getOrder().getUuid());
+				ServiceRequest serviceRequest = serviceRequestTranslator.toFhirResource(testOrder);
+				String serviceFhirJson = convertResourceToJson(serviceRequest);
+				log.debug(serviceFhirJson);
+				putFhirResource(serviceFhirJson, ResourceType.ServiceRequest, testOrder.getUuid());
 				
 				Observation hl7Observation = observationTranslator.toFhirResource(obs);
 				String obsFhirJson = convertResourceToJson(hl7Observation);
-				log.error(obsFhirJson);
-				observationHashSet.add(obsFhirJson);
+				log.debug(obsFhirJson);
 				
+				putFhirResource(obsFhirJson, ResourceType.Observation, obs.getUuid());
 			}
-		}
-		
-		for (String obsFhirResource : observationHashSet) {
-			postFhirResource(obsFhirResource, ResourceType.Observation);
 		}
 	}
 	
@@ -193,15 +233,32 @@ public class HieAtomFeedEventWorker implements EventWorker {
 	
 	private void postFhirResource(String fhirResource, ResourceType resourceType) {
 		log.debug("Posting FHIR resource");
-        try {
-            StatusLine statusLine = FhirServerStoreUtil.postFhirResource(properties, fhirResource, resourceType);
-            if (statusLine.getStatusCode() != 200) {
-                log.error("FHIR Server error : " + statusLine.getStatusCode() + " \n Error message " + statusLine.getReasonPhrase());
-            }
-        } catch (IOException | AuthenticationException e) {
-            e.printStackTrace();
-        }
-    }
+		try {
+			StatusLine statusLine = FhirServerStoreUtil.postFhirResource(properties, fhirResource, resourceType);
+			if (statusLine.getStatusCode() != 200) {
+				log.error("FHIR Server error : " + statusLine.getStatusCode() + " \n Error message " + statusLine
+						.getReasonPhrase());
+			}
+		}
+		catch (IOException | AuthenticationException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void putFhirResource(String fhirResource, ResourceType resourceType, String resourceIdentifier) {
+		log.debug("Posting FHIR resource");
+		try {
+			StatusLine statusLine = FhirServerStoreUtil
+					.putFhirResource(properties, fhirResource, resourceType, resourceIdentifier);
+			if (statusLine.getStatusCode() != 200) {
+				log.error("FHIR Server error : " + statusLine.getStatusCode() + " \n Error message " + statusLine
+						.getReasonPhrase());
+			}
+		}
+		catch (IOException | AuthenticationException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	private HttpHeaders getHttpHeaders() {
 		HttpHeaders httpHeaders = new HttpHeaders();

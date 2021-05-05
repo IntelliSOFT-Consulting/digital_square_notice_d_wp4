@@ -35,7 +35,7 @@ public class HieAtomFeedProperties extends AtomFeedProperties {
 	
 	private String fhirServerEncounterEndpoint = "http://45.33.84.72:5001/fhir/encounter";
 	
-	private String getDefaultObsConcept = "fe769568-16da-4d9e-9c99-fbed0a8a60f5";
+	private String getDefaultObsConcept = "856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
 	
 	private String fhirHostUser = "fhir";
 	
@@ -48,6 +48,12 @@ public class HieAtomFeedProperties extends AtomFeedProperties {
 	private int feedConnectionTimeoutInMilliseconds = 10000;
 	
 	private int feedReplyTimeoutInMilliseconds = 20000;
+	
+	private String fhirServerLocationEndpoint = "http://45.33.84.72:5001/fhir/location";
+	
+	private String fhirServerPractitionerEndpoint = "http://45.33.84.72:5001/fhir/practitioner";
+	
+	private String fhirServerServiceRequestEndpoint = "http://45.33.84.72:5001/fhir/serviceRequest";
 	
 	public String getOpenMrsUri() {
 		return openMrsUri;
@@ -114,6 +120,18 @@ public class HieAtomFeedProperties extends AtomFeedProperties {
 		return fhirServerEncounterEndpoint;
 	}
 	
+	public String getFhirServerLocationEndpoint() {
+		return fhirServerLocationEndpoint;
+	}
+	
+	public String getFhirServerPractitionerEndpoint() {
+		return fhirServerPractitionerEndpoint;
+	}
+	
+	public String getFhirServerServiceRequestEndpoint() {
+		return fhirServerServiceRequestEndpoint;
+	}
+	
 	@Override
 	public int getMaxFailedEvents() {
 		return feedMaxFailedEvents;
@@ -128,4 +146,5 @@ public class HieAtomFeedProperties extends AtomFeedProperties {
 	public int getConnectTimeout() {
 		return feedConnectionTimeoutInMilliseconds;
 	}
+	
 }

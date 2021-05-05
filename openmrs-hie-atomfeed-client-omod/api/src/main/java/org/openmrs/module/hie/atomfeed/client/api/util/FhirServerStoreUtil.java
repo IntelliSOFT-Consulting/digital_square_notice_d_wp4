@@ -18,6 +18,7 @@ import org.apache.http.auth.AuthenticationException;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -25,6 +26,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Patient;
 import org.hl7.fhir.r4.model.ResourceType;
+import org.openmrs.api.APIException;
 import org.openmrs.module.hie.atomfeed.client.api.HieAtomFeedProperties;
 import org.openmrs.module.hie.atomfeed.client.api.exception.HieClientExcepption;
 
@@ -54,27 +56,62 @@ public class FhirServerStoreUtil {
 	public static StatusLine postFhirResource(HieAtomFeedProperties properties, String fhirJsonesource,
 	        ResourceType resourceType) throws IOException, AuthenticationException {
 		CloseableHttpClient client = HttpClients.createDefault();
-		HttpPost httpPost;
+		HttpPost httpPut;
 		
 		if (resourceType.equals(ResourceType.Patient)) {
-			httpPost = new HttpPost(properties.getFhirServerPatientEndpoint());
+			httpPut = new HttpPost(properties.getFhirServerPatientEndpoint());
 		} else if (resourceType.equals(ResourceType.Observation)) {
-			httpPost = new HttpPost(properties.getFhirServerObservationEndpoint());
+			httpPut = new HttpPost(properties.getFhirServerObservationEndpoint());
 		} else if (resourceType.equals(ResourceType.Encounter)) {
-			httpPost = new HttpPost(properties.getFhirServerEncounterEndpoint());
+			httpPut = new HttpPost(properties.getFhirServerEncounterEndpoint());
 		} else {
-			httpPost = new HttpPost(properties.getFhirServerHost());
+			httpPut = new HttpPost(properties.getFhirServerHost());
 		}
-		
-		fhirJsonesource = addResourceTypeToJson(fhirJsonesource, resourceType);
 
-		httpPost.addHeader("Content-Type", "application/fhir+json");
-		httpPost.setEntity(new StringEntity(fhirJsonesource));
+		httpPut.addHeader("Content-Type", "application/fhir+json");
+		httpPut.setEntity(new StringEntity(fhirJsonesource));
 		UsernamePasswordCredentials creds = new UsernamePasswordCredentials(properties.getFhirHostUser(),
 		        properties.getFhirHostPassword());
-		httpPost.addHeader(new BasicScheme().authenticate(creds, httpPost, null));
+		httpPut.addHeader(new BasicScheme().authenticate(creds, httpPut, null));
 		
-		CloseableHttpResponse response = client.execute(httpPost);
+		CloseableHttpResponse response = client.execute(httpPut);
+		StatusLine statusLine = response.getStatusLine();
+		log.error("Status returned " + statusLine.getStatusCode());
+		log.error(statusLine.getReasonPhrase());
+		client.close();
+		return statusLine;
+	}
+	
+	public static StatusLine putFhirResource(HieAtomFeedProperties properties, String fhirJsonResource,
+	        ResourceType resourceType, String resourceId) throws IOException, AuthenticationException {
+		CloseableHttpClient client = HttpClients.createDefault();
+		HttpPut httpPut;
+		
+		if (resourceType.equals(ResourceType.Patient)) {
+			httpPut = new HttpPut(properties.getFhirServerPatientEndpoint() + "/" + resourceId);
+		} else if (resourceType.equals(ResourceType.Observation)) {
+			httpPut = new HttpPut(properties.getFhirServerObservationEndpoint() + "/" + resourceId);
+		} else if (resourceType.equals(ResourceType.Encounter)) {
+			httpPut = new HttpPut(properties.getFhirServerEncounterEndpoint() + "/" + resourceId);
+		} else if (resourceType.equals(ResourceType.Location)) {
+			httpPut = new HttpPut(properties.getFhirServerLocationEndpoint() + "/" + resourceId);
+		} else if (resourceType.equals(ResourceType.Practitioner)) {
+			httpPut = new HttpPut(properties.getFhirServerPractitionerEndpoint() + "/" + resourceId);
+		} else if (resourceType.equals(ResourceType.ServiceRequest)) {
+			httpPut = new HttpPut(properties.getFhirServerServiceRequestEndpoint() + "/" + resourceId);
+		} else {
+			throw new APIException("Unsupported resource type");
+		}
+		
+		//fhirJsonResource = addResourceTypeToJson(fhirJsonResource, resourceType);
+		log.debug("Resource type: " + resourceType + ": " + fhirJsonResource);
+		httpPut.addHeader("Content-Type", "application/fhir+json");
+		httpPut.setEntity(new StringEntity(fhirJsonResource));
+		UsernamePasswordCredentials creds = new UsernamePasswordCredentials(properties.getFhirHostUser(),
+		        properties.getFhirHostPassword());
+		httpPut.addHeader(new BasicScheme().authenticate(creds, httpPut, null));
+		
+		CloseableHttpResponse response = client.execute(httpPut);
 		StatusLine statusLine = response.getStatusLine();
 		log.error("Status returned " + statusLine.getStatusCode());
 		log.error(statusLine.getReasonPhrase());

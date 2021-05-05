@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>OpenMRS</title>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="<%= openmrsFavicon %>"
+    >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="importmap-type" content="systemjs-importmap">
+    <%= htmlWebpackPlugin.tags.headTags %>
+<% if (openmrsImportmapDef) { %>
+    <script type="systemjs-importmap"><%= openmrsImportmapDef %></script>
+<% } else { %>
+    <link
+      rel="preload"
+      href="<%= openmrsImportmapUrl %>"
+      as="fetch"
+      crossorigin="anonymous"
+    >
+    <script type="systemjs-importmap" src="<%= openmrsImportmapUrl %>"></script>
+<% } %>
+  </head>
+  <body>
+    <%= htmlWebpackPlugin.tags.bodyTags %>
+    <script>
+      initializeSpa({
+        apiUrl: "<%= openmrsApiUrl %>",
+        spaPath: "<%= openmrsPublicPath %>",
+        env: "<%= openmrsEnvironment %>",
+        configUrls: [<%= openmrsConfigUrls %>],
+      });
+    </script>
+  </body>
+</html>
+ 

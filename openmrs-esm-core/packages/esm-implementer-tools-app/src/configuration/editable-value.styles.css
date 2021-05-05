@@ -1,0 +1,17 @@
+.secretButton {
+  background: none;
+  color: #474b6b;
+  border: none;
+  font: inherit;
+  text-align: left;
+}
+
+.error {
+  margin-left: 1em;
+  color: orange;
+  font-size: 11pt;
+}
+
+.overriddenValue {
+  color: #2020a0;
+}

@@ -1,0 +1,55 @@
+services:
+
+  # OpenMRS:
+  openmrs:
+    build: openmrs/
+    depends_on:
+      - mysql
+    environment:
+      MODULE_WEB_ADMIN: "true"
+      DB_AUTO_UPDATE: "true"
+      DB_CREATE_TABLES: "true"
+      DB_HOST: mysql
+      DB_DATABASE: openmrs
+      DB_USERNAME: ${OPENMRS_DB_USER}
+      DB_PASSWORD: ${OPENMRS_DB_PASSWORD}
+    ports:
+      - 8080:8080
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - "-f"
+        - "http://localhost:8080/openmrs/"
+      timeout: 5s
+    volumes:
+      - "openmrs-data:/usr/local/tomcat/.OpenMRS/"
+      - "${OPENMRS_MODULES_PATH:-openmrs-modules}:/usr/local/tomcat/.OpenMRS/modules/"
+      - "${OPENMRS_CONFIG_PATH:-openmrs-config}:/usr/local/tomcat/.OpenMRS/configuration/"
+      - "${OPENMRS_CONFIG_CHECKSUMS_PATH:-openmrs-config-checksums}:/usr/local/tomcat/.OpenMRS/configuration_checksums/"
+      - "${OPENMRS_MF_PATH:-openmrs-mf}:/usr/local/tomcat/.OpenMRS/frontend/"
+      - ./properties/openmrs/:/etc/properties/
+
+  # MySQL
+  mysql:
+    command: "mysqld --character-set-server=utf8 --collation-server=utf8_general_ci"
+    environment:
+      MYSQL_DATABASE: openmrs
+      MYSQL_USER: ${OPENMRS_DB_USER}
+      MYSQL_PASSWORD: ${OPENMRS_DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+    healthcheck:
+      test: "exit 0"
+    image: "mariadb:10.3"
+    volumes:
+      - "${MYSQL_DATADIR:-mysql-data}:/var/lib/mysql"
+
+version: "3"
+volumes:
+  openmrs-data: ~
+  mysql-data: ~
+  openmrs-config: ~
+  openmrs-config-checksums: ~
+  openmrs-modules: ~
+  openmrs-owas: ~
+  openmrs-mf: ~

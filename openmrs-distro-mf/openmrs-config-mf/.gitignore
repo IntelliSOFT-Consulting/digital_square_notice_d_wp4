@@ -1,0 +1,4 @@
+**/*.checksum
+target/
+.project
+.DS_Store

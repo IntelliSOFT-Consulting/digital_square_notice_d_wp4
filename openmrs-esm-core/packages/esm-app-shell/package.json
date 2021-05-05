@@ -1,0 +1,58 @@
+{
+  "name": "@openmrs/esm-app-shell",
+  "version": "3.1.9",
+  "license": "MPL-2.0",
+  "main": "dist/openmrs.js",
+  "scripts": {
+    "start": "npm run watch",
+    "test": "jest --passWithNoTests",
+    "watch:ref": "cross-env OMRS_ESM_IMPORTMAP_URL=\"https://spa-modules.nyc3.digitaloceanspaces.com/import-map.json\" NODE_ENV=\"development\" webpack-dev-server --mode development",
+    "build": "cross-env OMRS_ESM_IMPORTMAP_URL=\"https://spa-modules.nyc3.digitaloceanspaces.com/import-map.json\" NODE_ENV=\"production\" webpack --mode production",
+    "watch": "webpack-dev-server --mode development",
+    "lint": "eslint src --ext ts,tsx"
+  },
+  "keywords": [
+    "openmrs",
+    "microfrontends"
+  ],
+  "browserslist": [
+    "extends browserslist-config-openmrs"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/openmrs/openmrs-esm-core.git"
+  },
+  "bugs": {
+    "url": "https://github.com/openmrs/openmrs-esm-core/issues"
+  },
+  "homepage": "https://github.com/openmrs/openmrs-esm-core#readme",
+  "dependencies": {
+    "@openmrs/esm-api": "^3.1.9",
+    "@openmrs/esm-config": "^3.1.9",
+    "@openmrs/esm-error-handling": "^3.1.9",
+    "@openmrs/esm-extensions": "^3.1.9",
+    "@openmrs/esm-react-utils": "^3.1.9",
+    "@openmrs/esm-styleguide": "^3.1.9",
+    "carbon-components": "^10.19.0",
+    "carbon-icons": "^7.0.7",
+    "i18next": "^19.6.0",
+    "i18next-browser-languagedetector": "^4.3.1",
+    "i18next-http-backend": "^1.0.21",
+    "i18next-icu": "^1.4.2",
+    "import-map-overrides": "^1.15.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-i18next": "^11.7.0",
+    "react-router-dom": "^5.2.0",
+    "rxjs": "^6.5.3",
+    "single-spa": "^4.4.1",
+    "systemjs": "^6.3.3"
+  },
+  "devDependencies": {
+    "@types/systemjs": "^6.1.0",
+    "css-modules-typescript-loader": "^4.0.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "name": "@openmrs/esm-api",
+  "version": "3.1.9",
+  "license": "MPL-2.0",
+  "description": "The javascript module for interacting with the OpenMRS API",
+  "browser": "dist/openmrs-esm-api.js",
+  "main": "src/index.ts",
+  "source": true,
+  "scripts": {
+    "test": "jest --config jest.config.js --passWithNoTests",
+    "build": "webpack --mode=production",
+    "typescript": "tsc",
+    "lint": "eslint src --ext ts,tsx",
+    "format": "prettier --write src/**"
+  },
+  "keywords": [
+    "openmrs",
+    "microfrontends"
+  ],
+  "directories": {
+    "lib": "dist",
+    "src": "src"
+  },
+  "browserslist": [
+    "extends browserslist-config-openmrs"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/openmrs/openmrs-esm-core.git"
+  },
+  "bugs": {
+    "url": "https://github.com/openmrs/openmrs-esm-core/issues"
+  },
+  "homepage": "https://github.com/openmrs/openmrs-esm-core#readme",
+  "dependencies": {
+    "fhir.js": "0.0.22",
+    "lodash-es": "^4.17.15",
+    "systemjs-webpack-interop": "^2.1.2",
+    "unistore": "^3.5.2"
+  },
+  "peerDependencies": {
+    "@openmrs/esm-config": "3.x",
+    "@openmrs/esm-error-handling": "3.x"
+  },
+  "devDependencies": {
+    "@openmrs/esm-config": "^3.1.9",
+    "@openmrs/esm-error-handling": "^3.1.9",
+    "@types/fhir": "0.0.31",
+    "rxjs": "^6.5.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

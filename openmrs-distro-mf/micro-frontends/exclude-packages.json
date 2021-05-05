@@ -1,0 +1,18 @@
+{
+  "dayjs": "any",
+  "regenerator-runtime": "any",
+  "history": "any",
+  "@babel/runtime": "any",
+  "loose-envify": "any",
+  "prop-types": "any",
+  "tiny-invariant": "any",
+  "tiny-warning": "any",
+  "lodash-es": "any",
+  "react-grid-gallery": "any",
+  "react-is": "any",
+  "highlight.js": "any",
+  "html-parse-stringify2": "any",
+  "hoist-non-react-statics": "any",
+  "mini-create-react-context": "any",
+  "path-to-regexp": "any"
+}

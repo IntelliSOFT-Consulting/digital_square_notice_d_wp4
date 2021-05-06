@@ -1,6 +1,7 @@
-FROM alpine
+#FROM alpine
+FROM node:10.24.1-alpine3.10
 
-RUN apk add --update nodejs nodejs-npm
+#RUN apk add --update nodejs nodejs-npm
 
 WORKDIR /app
 
@@ -10,6 +11,12 @@ RUN npm ci
 
 COPY . .
 
-EXPOSE 8080
+#RUN echo fs.inotify.max_user_watches=524288 | tee -a /etc/sysctl.conf && sysctl -p
 
-CMD ["npm", "run", "start:large"]
+RUN npm run build
+
+EXPOSE 8080 8081 8889 8888
+
+#CMD ["npm", "run", "start:large"]
+
+CMD ["npm", "run", "serve"] 

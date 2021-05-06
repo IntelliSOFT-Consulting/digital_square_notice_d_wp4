@@ -1,0 +1,104 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>net.mekomsolutions</groupId>
+  <artifactId>frontends</artifactId>
+  <name>MF artifacts</name>
+  <description>Micro Frontends for the OpenMRS Micro Frontends distribution</description>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <developers>
+    <developer>
+      <name>Mekom Solutions</name>
+    </developer>
+  </developers>
+  <organization>
+    <name>Mekom Solutions</name>
+    <url>http://www.mekomsolutions.com</url>
+  </organization>
+
+  <build>
+    <plugins>
+      <plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.3.2</version>
+				<executions>
+					<!-- Required: The following will ensure `npm install` is called
+					     before anything else during the 'Default Lifecycle' -->
+					<execution>
+						<id>npm install (initialize)</id>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<phase>initialize</phase>
+						<configuration>
+							<executable>npm</executable>
+							<arguments>
+								<argument>install</argument>
+							</arguments>
+						</configuration>
+					</execution>
+
+					<!-- Required: The following will ensure `npm install` is called
+					     before anything else during the 'Clean Lifecycle' -->
+					<execution>
+						<id>npm install (clean)</id>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<phase>pre-clean</phase>
+						<configuration>
+							<executable>npm</executable>
+							<arguments>
+								<argument>install</argument>
+							</arguments>
+						</configuration>
+					</execution>
+
+					<!-- Required: This following calls `npm run build` where 'build' is
+					     the script name I used in my project, change this if yours is
+							 different -->
+					<execution>
+						<id>npm run build (compile)</id>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<phase>compile</phase>
+						<configuration>
+							<executable>npm</executable>
+							<arguments>
+								<argument>run</argument>
+								<argument>build</argument>
+							</arguments>
+						</configuration>
+					</execution>
+
+        </executions>
+			</plugin>
+
+      <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-assembly-plugin</artifactId>
+      <executions>
+        <execution>
+          <id>create-package</id>
+          <phase>package</phase>
+          <goals>
+            <goal>single</goal>
+          </goals>
+          <configuration>
+            <appendAssemblyId>false</appendAssemblyId>
+            <descriptors>
+              <descriptor>src/main/assembly/assembly.xml</descriptor>
+            </descriptors>
+          </configuration>
+        </execution>
+      </executions>
+    </plugin>
+    
+    </plugins>
+
+  </build>
+
+</project>

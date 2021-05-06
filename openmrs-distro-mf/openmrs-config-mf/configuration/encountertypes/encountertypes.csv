@@ -1,0 +1,5 @@
+Uuid,Void/Retire,Name,Description,View privilege,Edit privilege,_order:1000
+79b9e582-6c4d-45a0-9bd7-f846b90a3062,,Admission,"Indicates that the patient has been admitted for inpatient care, and is not expected to leave the hospital unless discharged.",,,
+47dd00b9-eaf2-4bea-a4c6-bacd60fd6ca6,,Attachment Upload,Encounters used to record uploads of attachments.,,,
+ddcdc8bb-6e60-4625-9690-7bcb7d98a997,,Visit Note,"Encounter where a full or abbreviated examination is done, usually leading to a presumptive or confirmed diagnosis, recorded by the examining clinician.",,,
+a2d95de3-4fad-47dc-9908-4f9aec9e4829,,Vitals,For capturing vital signs,,,

@@ -1,0 +1,52 @@
+{
+  "name": "@openmrs/esm-config",
+  "version": "3.1.9",
+  "license": "MPL-2.0",
+  "description": "A configuration library for the OpenMRS Single-Spa framework.",
+  "browser": "dist/openmrs-esm-module-config.js",
+  "main": "src/index.ts",
+  "source": true,
+  "scripts": {
+    "document": "./document.sh",
+    "test": "jest --config jest.config.js --passWithNoTests",
+    "build": "webpack --mode=production",
+    "typescript": "tsc",
+    "lint": "eslint src --ext ts,tsx",
+    "format": "prettier --write src/**"
+  },
+  "keywords": [
+    "openmrs",
+    "microfrontends"
+  ],
+  "directories": {
+    "lib": "dist",
+    "src": "src"
+  },
+  "browserslist": [
+    "extends browserslist-config-openmrs"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/openmrs/openmrs-esm-core.git"
+  },
+  "bugs": {
+    "url": "https://github.com/openmrs/openmrs-esm-core/issues"
+  },
+  "homepage": "https://github.com/openmrs/openmrs-esm-core#readme",
+  "dependencies": {
+    "ramda": "^0.26.1",
+    "systemjs-webpack-interop": "^2.1.2"
+  },
+  "peerDependencies": {
+    "single-spa": "4.x"
+  },
+  "devDependencies": {
+    "@types/ramda": "^0.26.44",
+    "@types/systemjs": "^6.1.0",
+    "babel-plugin-ramda": "^2.0.0",
+    "single-spa": "^4.4.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

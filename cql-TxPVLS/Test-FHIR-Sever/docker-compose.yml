@@ -1,0 +1,93 @@
+version: "3.7"
+services:
+  web:
+    image: "hapiproject/hapi:latest"
+    ports:
+      - "8095:8080"
+    configs:
+      - source: hapi
+        target: /data/hapi/application.yaml
+    volumes:
+      - hapi-data:/data/hapi
+    environment:
+      SPRING_CONFIG_LOCATION: 'file:///data/hapi/application.yaml'
+
+
+  # PostgreSQL database for HAPI FHIR
+  hapi-fhir-postgres:
+    ports:
+      - '5436:5432'
+    image: postgres
+    container_name: hapi-fhir-postgres
+    volumes:
+      - hapi-fhir-postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${FHIR_DB}
+      POSTGRES_USER: ${FHIR_POSTGRES_USER}
+      POSTGRES_PASSWORD: ${FHIR_POSTGRES_PASSWORD}
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: keycloak
+      MYSQL_USER: keycloak
+      MYSQL_PASSWORD: password
+    
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak
+    # volumes:
+    #  - /config/hapifhir-realm.json:/tmp/hapifhir-realm.json
+    environment:
+      DB_VENDOR: MYSQL
+      DB_ADDR: mysql
+      DB_DATABASE: keycloak
+      DB_USER: keycloak
+      DB_PASSWORD: password
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: Pa55w0rd
+      # JDBC_PARAMS: "ssl=false"
+      # KEYCLOAK_IMPORT: /tmp/hapifhir-realm.json
+      # PROXY_ADDRESS_FORWARDING: true
+    ports:
+      - 9090:8080
+    depends_on:
+      - mysql
+
+  auth:
+    image:  intellisoftkenya/hapi-auth
+    container_name: auth
+    environment:
+      KEYCLOAK_URL: ${KEYCLOAK_URL}
+      KEYCLOAK_REALM: ${KEYCLOAK_REALM}
+      KEYCLOAK_CLIENT_ID: ${KEYCLOAK_CLIENT_ID}
+    ports:
+      - 8084:8084
+    depends_on:
+      - keycloak
+    restart: always
+
+configs:
+  hapi:
+     external: true
+
+volumes:
+  hapi-data:
+        external: true
+  hapi-fhir-postgres:
+  mysql_data:
+
+networks:
+  default:
+    external:
+      name: hapi-fhir

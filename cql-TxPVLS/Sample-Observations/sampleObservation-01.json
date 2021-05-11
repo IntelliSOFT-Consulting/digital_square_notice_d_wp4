@@ -1,0 +1,39 @@
+{
+    "resourceType": "Observation",
+    "id": "{}",
+    "text": {
+      "status": "generated",
+      "div": ""
+    },
+    "identifier": [
+      {
+        "use": "official",
+        "system": "http://www.bmc.nl/zorgportal/identifiers/observations",
+        "value": "{}"
+      }
+    ],
+    "status": "final",
+    "code": {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "315124004",
+          "display": "Human immunodeficiency virus viral load (procedure)"
+        }
+      ]
+    },
+    "subject": {
+      "reference": "Patient/{}",
+      "display": "P. van de Heuvel"
+    },
+    "effectivePeriod": {
+      "start": "{}",
+      "end": "{}"
+    },
+    "issued": "{}",
+    "valueQuantity": {
+      "value": {},
+      "unit": "copies/mL",
+      "system": "http://unitsofmeasure.org"
+    }
+  }

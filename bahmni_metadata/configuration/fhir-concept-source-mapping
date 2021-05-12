@@ -1,0 +1,35 @@
+REPLACE INTO fhir_concept_source(
+concept_source_id,
+url,
+name,
+description,
+creator,
+date_created,
+uuid)
+VALUES(
+2,
+'http://snomed.info/sct',
+'SNOMED CT',
+'',
+1,
+'2020-05-12',
+'8d503925-e8b7-4302-b1be-da34a5834a77'
+);
+
+REPLACE INTO fhir_concept_source(
+concept_source_id,
+url,
+name,
+description,
+creator,
+date_created,
+uuid)
+VALUES(
+5,
+'http://ciel.org',
+'CIEL',
+'',
+1,
+'2020-05-12',
+'597fbe8b-6273-4133-af7b-4216c27912b2'
+);

@@ -7,7 +7,7 @@
   "license": "MPL-2.0",
   "homepage": "https://github.com/openmrs/openmrs-esm-lab-results#readme",
   "scripts": {
-    "start": "openmrs debug --run-project --port 8888 --host '0.0.0.0' ",
+    "start": "openmrs debug --run-project --port 8888",
     "start:large": "NODE_OPTIONS=--max_old_space_size=4096 npm start",
     "serve": "webpack-dev-server",
     "debug": "npm run serve",

@@ -16,15 +16,26 @@ export default function Results(){
     let reportingDate = args.get('reportingDate');
     let _start = new Date(reportingDate)
     _start.setFullYear(_start.getFullYear() - 1)
-    let start = _start.getFullYear() + "-" + String(_start.getMonth() + 1).padStart(2, 0) + "-" + String(_start.getDate()).padStart(2, 0)
+    _start = new Date(_start).toISOString()
+    let start = _start
     
+    let s = new Date(reportingDate)
+    let x = s.setHours(s.getHours() + 23)
+    let y = new Date(x)
+    let _y = y.setMinutes(y.getMinutes() + 59)
+    let z  = new Date(_y)
+    let _z = z.setSeconds(z.getSeconds() + 59)
+    reportingDate = new Date(_z).toISOString()
+    
+    // reportingDate = x
+    console.log(s, x)
     let reportingPeriod = {
         start: start,
         end: reportingDate
     } 
 
-    console.log(reportingDate)
-    console.log(start)
+    console.log("Reporting Date", reportingDate)
+    console.log("Start Date", start)
 
 
     let [results, setResults] = useState('')
@@ -49,7 +60,7 @@ export default function Results(){
     useEffect(() => {
         
         async function fetchData(){
-            let response = await fetch(baseUrl(id, {start, reportingDate}), {headers:{'Content-Type':'application/json'}}) 
+            let response = await fetch(baseUrl(id, {start:_start, reportingDate: reportingDate}), {headers:{'Content-Type':'application/json'}}) 
             let data = await response.json()
             // console.log(data)
             if(typeof data.group[0].measureScore == 'undefined'){

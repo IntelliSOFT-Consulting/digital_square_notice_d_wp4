@@ -4,11 +4,11 @@ using FHIR version '4.0.1'
 
 include FHIRHelpers version '4.0.1' called FHIRHelpers
 
-codesystem "SNOMEDCT:2017-09": 'http://snomed.info/sct' version 'http://snomed.info/sct/731000124108/version/201709'
+codesystem "SNOMEDCT:2017-09": 'http://snomed.info/sct' version 'http://snomed.info/sct'
 codesystem "CIEL": 'https://openconceptlab.org/orgs/CIEL/sources/CIEL'
 
 
-code "Human immunodeficiency virus viral load (procedure)": '315124004' from "SNOMEDCT:2017-09" display 'Human immunodeficiency virus viral load (procedure)'
+code "HIV VIRAL LOAD": '315124004' from "SNOMEDCT:2017-09" display 'HIV VIRAL LOAD'
 code "HIV viral load": '856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' from "CIEL" display 'HIV viral load'
 
 
@@ -29,13 +29,13 @@ parameter "Measurement Period" Interval<DateTime>
 context Patient
 
 define "Initial Population":
-    [Observation: "HIV viral load"] VL
+    [Observation: "HIV VIRAL LOAD"] VL
         where FHIRHelpers.ToDateTime(VL."issued") during "Measurement Period"
             and VL."value" is not null
 
 define "Suppressed VL Results":
     "Initial Population" VL
-        where VL."value" < 1000 'copies/mL'
+        where VL."value" < 1000.0 
 
 define Numerator:
     "Suppressed VL Results"

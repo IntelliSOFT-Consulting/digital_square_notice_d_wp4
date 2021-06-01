@@ -4,7 +4,7 @@ import { Button, InlineLoading }  from 'carbon-components-react'
 import ResultsCard from './ResultsCard'
 // import Error from './Error'
 
-let baseUrl = (id, {start, reportingDate}) => { return `https://proxy-orcin.vercel.app/?url=${encodeURIComponent(
+let baseUrl = (id, {start, reportingDate}) => { return `https://proxy-seven-bice.vercel.app/?url=${encodeURIComponent(
     `http://45.33.84.72:8095/fhir/Measure/${id}/$evaluate-measure?periodStart=${start}&periodEnd=${reportingDate}&_format=json`
     )}`}
 

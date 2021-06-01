@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Dropdown, Button, DatePicker, DatePickerInput } from 'carbon-components-react'
 
-let url = 'https://proxy-orcin.vercel.app/?url=http://45.33.84.72:8095/fhir/Measure?_format=json'
+let url = 'https://proxy-seven-bice.vercel.app/?url=http://45.33.84.72:8095/fhir/Measure?_format=json'
 
 export default function Selector() {
 

@@ -1,2 +1,2 @@
-Uuid,Void/Retire,Fully specified name:en,Short name:en,Description:en,...,Normal low,Normal high,Allow decimals,Display precision,_version:1,_order:1,Data class,Data type,Answers,Same as mappings
-856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,,HIV VIRAL LOAD,,"This is a measure of the number of copies/ml of DNA/RNA in patients with HIV. ",,,,,,,,LabTest,Numeric,,CIEL:856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA;SNOMED:315124004
+Uuid,Void/Retire,Fully specified name:en,Short name:en,Same as mappings,Description:en,...,Normal low,Normal high,Allow decimals,Display precision,_version:1,_order:1,Data class,Data type,Answers
+856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,,HIV VIRAL LOAD,,CEIL:856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA; SNOMED:315124004	,"This is a measure of the number of copies/ml of DNA/RNA in patients with HIV. ",,,,,,,,LabTest,Numeric,

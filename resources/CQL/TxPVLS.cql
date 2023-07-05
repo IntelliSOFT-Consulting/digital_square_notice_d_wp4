@@ -19,7 +19,7 @@ context Patient
 
 define "Initial Population":
     [Observation: "Human immunodeficiency virus viral load (procedure)"] VL
-        where FHIRHelpers.ToDateTime(VL."issued") during MeasurementPeriod
+        where FHIRHelpers.ToDateTime(VL."issued") during "Measurement Period"
             and VL."value" is not null
 
 define SuppressedViralLoadResults:
